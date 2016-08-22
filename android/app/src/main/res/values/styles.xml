@@ -22,7 +22,7 @@
   </style>
 
   <style name="AppTheme.Lock.Theme.Title.Icon" parent="Lock.Theme.Title.Icon">
-    <item name="android:src">@mipmap/seattlepan</item>
+    <item name="android:src">@mipmap/magnifying_glass</item>
   </style>
 
   <style name="AppTheme.Lock.Theme.Title.Text" parent="Lock.Theme.Title.Text">

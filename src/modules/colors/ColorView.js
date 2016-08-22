@@ -16,7 +16,8 @@ const color = () => Math.floor(255 * Math.random());
 const ColorView = React.createClass({
   propTypes: {
     index: PropTypes.number.isRequired,
-    dispatch: PropTypes.func.isRequired
+    dispatch: PropTypes.func.isRequired,
+    barcode: PropTypes.string
   },
 
   getInitialState() {

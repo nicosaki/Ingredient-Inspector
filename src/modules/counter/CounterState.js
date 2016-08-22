@@ -4,7 +4,7 @@ import {generateRandomNumber} from '../../services/randomNumberService';
 
 // Initial state
 const initialState = Map({
-  value: 0,
+  value: '',
   loading: false
 });
 
