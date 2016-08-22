@@ -16,7 +16,11 @@ const reducers = {
   //`navigationState`
   navigationState: NavigationStateReducer,
 
-  session: SessionStateReducer
+  session: SessionStateReducer,
+
+  scanner: ScannerStateReducer,
+
+  lists: ListStateReducer
 
 };
 

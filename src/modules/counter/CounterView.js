@@ -11,27 +11,39 @@ import {
 
 const CounterView = React.createClass({
   propTypes: {
-    counter: PropTypes.number.isRequired,
-    userName: PropTypes.string,
+    userName: PropTypes.string, //removed counter
     userProfilePhoto: PropTypes.string,
     loading: PropTypes.bool.isRequired,
-    dispatch: PropTypes.func.isRequired
+    dispatch: PropTypes.func.isRequired,
+    avoid: PropTypes.array, //UNSURE IF ARRAY IS LEGIT
+    approved: PropTypes.array,
+    contacted: PropTypes.array
   },
-  increment() {
-    this.props.dispatch(CounterState.increment());
-  },
-  reset() {
-    this.props.dispatch(CounterState.reset());
-  },
-  random() {
-    this.props.dispatch(CounterState.random());
-  },
-  bored() {
+  about() {
     this.props.dispatch(NavigationState.pushRoute({
-      key: 'Color',
-      title: 'Color Screen'
+      key: 'About',
+      title: 'About IngredientInspector'
     }));
   },
+  avoid() {
+    this.props.dispatch(NavigationState.pushRoute({
+      key: 'Avoid',
+      title: 'Avoid'
+    }));
+  },
+  approved() {
+    this.props.dispatch(NavigationState.pushRoute({
+      key: 'Approved',
+      title: 'Approved'
+    }));
+  },
+  contacted() {
+    this.props.dispatch(NavigationState.pushRoute({
+      key: 'Contacted',
+      title: 'Contacted'
+    }));
+  },
+
 
   renderUserInfo() {
     if (!this.props.userName) {
@@ -65,28 +77,28 @@ const CounterView = React.createClass({
         {this.renderUserInfo()}
 
         <TouchableOpacity
-          onPress={this.increment}
+          onPress={this.approved}
           style={[styles.counterButton, loadingStyle]}>
           <Text style={styles.counter}>
-            {this.props.counter}
+            See your Approved list
           </Text>
         </TouchableOpacity>
 
-        <TouchableOpacity onPress={this.reset}>
+        <TouchableOpacity onPress={this.avoid}>
           <Text style={styles.linkButton}>
-            Reset
+            See your Avoid list
           </Text>
         </TouchableOpacity>
 
-        <TouchableOpacity onPress={this.random}>
+        <TouchableOpacity onPress={this.contacted}>
           <Text style={styles.linkButton}>
-            Random
+            See manufacturers you have contacted
           </Text>
         </TouchableOpacity>
 
-        <TouchableOpacity onPress={this.bored} accessible={true}>
+        <TouchableOpacity onPress={this.about} accessible={true}>
           <Text style={styles.linkButton}>
-            {'I\'m bored!'}
+            {'About IngredientInspector'}
           </Text>
         </TouchableOpacity>
 
