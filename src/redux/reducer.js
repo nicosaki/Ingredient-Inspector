@@ -16,9 +16,9 @@ const reducers = {
   //`navigationState`
   navigationState: NavigationStateReducer,
 
-  session: SessionStateReducer,
-
-  scanner: ScannerStateReducer
+  session: SessionStateReducer
+  //
+  // scanner: ScannerStateReducer
 
   // lists: ListStateReducer
 

@@ -1,4 +1,8 @@
-// CounterState.js
+
+
+
+
+// NOT  CURRENTLY CONNECTED IN REDUCER; MAY BE TRASH
 import {Map} from 'immutable';
 
 // INITIAL STATE
@@ -33,9 +37,9 @@ const initialState = Map({
 //
 // Action creators are always named exports, `export function name() {...}`, or `export const name = ...`
 
-export function increment() {
-  return {type: UPDATE_NUMBER, payload: +1};
-}
+// export function increment() {
+//   return {type: UPDATE_NUMBER, payload: +1};
+// }
 
 // REDUCER (Naming: PascalCase)
 //
@@ -48,7 +52,7 @@ export function increment() {
 //
 // The reducer is always an ES6 default export.
 //
-// export default function CounterStateReducer(state = initialState, action) {
+// export default function ScannerStateReducer(state = initialState, action) {
 //   switch (action.type) {
 //     case UPDATE_NUMBER:
 //       return state.update('value', value => value + action.payload);

@@ -34,7 +34,6 @@ class BarcodeScanner extends Component {
       key: 'Ingredients',
       title: 'Ingredients of Potential Concern'
     }));
-    </TouchableOpacity>
   }
 
   render() {

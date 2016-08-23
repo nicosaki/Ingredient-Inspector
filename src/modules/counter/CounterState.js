@@ -25,8 +25,8 @@ export function updateContacted(upc) {
   return {type: UPDATE_CONTACTED, payload: upc};
 }
 
-export function updateAvoids(upc) {
-  return {type: UPDATE_AVOIDS, payload: upc};
+export function updateAvoid(upc) {
+  return {type: UPDATE_AVOID, payload: upc};
 }
 
 export function updateApproved(upc) {
@@ -49,7 +49,7 @@ export default function CounterStateReducer(state = initialState, action = {}) {
     case UPDATE_CONTACTED:
       return state.update('contacted', contacted => contacted + action.payload);
 
-    case UDPATE_AVOID:
+    case UPDATE_AVOID:
       return state.update('avoid', avoid => avoid + action.payload);
 
     case UPDATE_APPROVED:
