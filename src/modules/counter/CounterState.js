@@ -4,57 +4,56 @@ import {generateRandomNumber} from '../../services/randomNumberService';
 
 // Initial state
 const initialState = Map({
-  value: '',
-  loading: false
+  avoid: [],
+  approved: [],
+  contacted: [],
+  concerns: []
 });
 
 // Actions
-const INCREMENT = 'CounterState/INCREMENT';
-const RESET = 'CounterState/RESET';
-const RANDOM_REQUEST = 'CounterState/RANDOM_REQUEST';
-const RANDOM_RESPONSE = 'CounterState/RANDOM_RESPONSE';
+const UPDATE_CONCERNS = 'CounterState/UPDATE_CONCERNS';
+const UPDATE_AVOID = 'CounterState/UPDATE_AVOID';
+const UPDATE_APPROVED = 'CounterState/UPDATE_APPROVED';
+const UPDATE_CONTACTED = 'CounterState/UPDATE_CONTACTED';
 
 // Action creators
-export function increment() {
-  return {type: INCREMENT};
+export function updateConcerns(checked) {
+  return {type: UPDATE_CONCERNS, payload: checked};
 }
 
-export function reset() {
-  return {type: RESET};
+export function updateContacted(upc) {
+  return {type: UPDATE_CONTACTED, payload: upc};
 }
 
-export function random() {
-  return {
-    type: RANDOM_REQUEST
-  };
+export function updateAvoids(upc) {
+  return {type: UPDATE_AVOIDS, payload: upc};
 }
 
-export async function requestRandomNumber() {
-  return {
-    type: RANDOM_RESPONSE,
-    payload: await generateRandomNumber()
-  };
+export function updateApproved(upc) {
+  return {type: UPDATE_APPROVED, payload: upc};
 }
+
+// export async function requestRandomNumber() {
+//   return {
+//     type: RANDOM_RESPONSE,
+//     payload: await generateRandomNumber()
+//   };
+// }
 
 // Reducer
 export default function CounterStateReducer(state = initialState, action = {}) {
   switch (action.type) {
-    case INCREMENT:
-      return state.update('value', value => value + 1);
+    case UPDATE_CONCERNS:
+      return state.update('concerns', concerns => concerns + action.payload);
 
-    case RESET:
-      return initialState;
+    case UPDATE_CONTACTED:
+      return state.update('contacted', contacted => contacted + action.payload);
 
-    case RANDOM_REQUEST:
-      return loop(
-        state.set('loading', true),
-        Effects.promise(requestRandomNumber)
-      );
+    case UDPATE_AVOID:
+      return state.update('avoid', avoid => avoid + action.payload);
 
-    case RANDOM_RESPONSE:
-      return state
-        .set('loading', false)
-        .set('value', action.payload);
+    case UPDATE_APPROVED:
+      return state.update('approved', approved => approved + action.payload);
 
     default:
       return state;

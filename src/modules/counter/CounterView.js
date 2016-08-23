@@ -83,9 +83,8 @@ const CounterView = React.createClass({
         {this.renderUserInfo()}
 
         <TouchableOpacity
-          onPress={this.approved}
-          style={[styles.counterButton, loadingStyle]}>
-          <Text style={styles.counter}>
+          onPress={this.approved}>
+          <Text style={[styles.linkButton]}>
             See your Approved list
           </Text>
         </TouchableOpacity>
