@@ -9,7 +9,8 @@ import {Map} from 'immutable';
 // maximum flexibility when refactoring your state
 
 const initialState = Map({
-  barode: ''
+  barcode: '',
+  data: null
 });
 
 // ACTION TYPES (Naming: SCREAMING_CASE)
@@ -19,7 +20,7 @@ const initialState = Map({
 // the action name descriptive, as it helps with debugging. In most cases the action constants
 // will be private to the State file, but in some advanced scenarios may be exported
 
-const RETURN_UPC = 'ScannerState/RETURN_UPC';
+// const RETURN_UPC = 'ScannerState/RETURN_UPC';
 
 // ACTION CREATORS (Naming: camelCase)
 //
@@ -36,10 +37,6 @@ export function increment() {
   return {type: UPDATE_NUMBER, payload: +1};
 }
 
-export function decrement() {
-  return {type: UPDATE_NUMBER, payload: -1};
-}
-
 // REDUCER (Naming: PascalCase)
 //
 // Reducer is responsible for handling all the actions defined in this module. The first
@@ -50,12 +47,12 @@ export function decrement() {
 // the previous state without modifications.
 //
 // The reducer is always an ES6 default export.
-
-export default function CounterStateReducer(state = initialState, action) {
-  switch (action.type) {
-    case UPDATE_NUMBER:
-      return state.update('value', value => value + action.payload);
-    default:
-      return state;
-  }
-}
+//
+// export default function CounterStateReducer(state = initialState, action) {
+//   switch (action.type) {
+//     case UPDATE_NUMBER:
+//       return state.update('value', value => value + action.payload);
+//     default:
+//       return state;
+//   }
+// }

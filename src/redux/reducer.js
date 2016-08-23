@@ -18,9 +18,9 @@ const reducers = {
 
   session: SessionStateReducer,
 
-  scanner: ScannerStateReducer,
+  scanner: ScannerStateReducer
 
-  lists: ListStateReducer
+  // lists: ListStateReducer
 
 };
 

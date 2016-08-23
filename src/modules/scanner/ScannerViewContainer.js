@@ -1,5 +1,5 @@
 import {connect} from 'react-redux';
-import CounterView from './CounterView';
+import Scanner from '../../componenets/Scanner';
 
 // pass the counter's value to the component as a prop called `value`.
 // Because we omit the second parameter, the `dispatch` function is
@@ -8,4 +8,4 @@ export default connect(
   state => ({
     barcode: state.getIn(['scanner', 'barcode'])
   })
-)(CounterView);
+)(Scanner);
