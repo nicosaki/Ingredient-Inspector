@@ -29,6 +29,12 @@ class BarcodeScanner extends Component {
       text: `${e.data} (${e.type})`,
       type: e.type,
     });
+
+    this.props.dispatch(NavigationState.pushRoute({
+      key: 'Ingredients',
+      title: 'Ingredients of Potential Concern'
+    }));
+    </TouchableOpacity>
   }
 
   render() {
