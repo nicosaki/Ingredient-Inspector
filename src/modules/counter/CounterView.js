@@ -43,6 +43,12 @@ const CounterView = React.createClass({
       title: 'Contacted'
     }));
   },
+  concerns() {
+    this.props.dispatch(NavigationState.pushRoute({
+      key: 'Concerns',
+      title: 'High-Concern Ingredients'
+    }));
+  },
 
 
   renderUserInfo() {

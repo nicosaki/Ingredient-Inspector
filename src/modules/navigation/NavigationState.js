@@ -33,8 +33,8 @@ const initialState = fromJS({
   tabs: {
     index: 0,
     routes: [
-      {key: 'HomeTab', title: 'HOME'},
-      {key: 'ProfileTab', title: 'PROFILE'}
+      {key: 'HomeTab', title: 'YOUR LISTS'},
+      {key: 'Scanner', title: 'SCAN A BARCODE'}
     ]
   },
   // Scenes for the `HomeTab` tab.
@@ -43,9 +43,30 @@ const initialState = fromJS({
     routes: [{key: 'Counter', title: 'Counter Screen'}]
   },
   // Scenes for the `ProfileTab` tab.
-  ProfileTab: {
+
+  Approved: {
+    index: 1,
+    routes: [{key: 'Approved', title: 'Approved'}]
+  },
+
+  Avoid: {
+    index: 1,
+    routes: [{key: 'Avoid', title: 'Avoid'}]
+  },
+
+  Concerns: {
+    index: 1,
+    routes: [{key: 'Concerns', title: 'High-Concern Ingredients'}]
+  },
+
+  About: {
+    index: 1,
+    routes: [{key: 'About', title: 'About IngredientInspector'}]
+  },
+
+  Scanner: {
     index: 0,
-    routes: [{key: 'Color', title: 'Color Screen'}]
+    routes: [{key: 'Scanner', title: 'Scanner'}, {key: 'Ingredients', title: "Ingredients of Potential Concern:"}]
   }
 });
 
