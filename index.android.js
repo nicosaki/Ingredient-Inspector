@@ -3,7 +3,7 @@ import {Provider} from 'react-redux';
 import store from './src/redux/store';
 import AppViewContainer from './src/modules/AppViewContainer';
 import React from 'react';
-import {AppRegistry, BackAndroid} from 'react-native';
+import {AppRegistry, BackAndroid, AsyncStorage} from 'react-native';
 import * as NavigationStateActions from './src/modules/navigation/NavigationState';
 
 const PepperoniAppTemplate = React.createClass({
@@ -11,6 +11,24 @@ const PepperoniAppTemplate = React.createClass({
   componentWillMount() {
     BackAndroid.addEventListener('hardwareBackPress', this.navigateBack);
   },
+
+  componentDidMount: function() {
+        AsyncStorage.getItem("approved").then((value) => {
+            this.setState({"approved": value});
+        }).done();
+        AsyncStorage.getItem("avoid").then((value) => {
+            this.setState({"avoid": value});
+        }).done();
+        AsyncStorage.getItem("concerns").then((value) => {
+            this.setState({"concerns": value});
+        }).done();
+        AsyncStorage.getItem("contacted").then((value) => {
+            this.setState({"contacted": value});
+        }).done();
+        AsyncStorage.getItem("id").then((value) => {
+            this.setState({"id": value});
+        }).done();
+    },
 
   navigateBack() {
     const navigationState = store.getState().get('navigationState');
