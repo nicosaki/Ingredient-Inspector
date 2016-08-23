@@ -14,7 +14,7 @@ import {Map} from 'immutable';
 
 const initialState = Map({
   barcode: '',
-  data: null
+  loading: true
 });
 
 // ACTION TYPES (Naming: SCREAMING_CASE)

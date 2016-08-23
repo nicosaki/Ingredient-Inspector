@@ -11,39 +11,36 @@ import {
 
 const CounterView = React.createClass({
   propTypes: {
-    userName: PropTypes.string, //removed counter
+    userName: PropTypes.string,
     userProfilePhoto: PropTypes.string,
     loading: PropTypes.bool.isRequired,
-    dispatch: PropTypes.func.isRequired,
-    avoid: PropTypes.array, //UNSURE IF ARRAY IS LEGIT
-    approved: PropTypes.array,
-    contacted: PropTypes.array
+    dispatch: PropTypes.func.isRequired
   },
-  about() {
+  abouts() {
     this.props.dispatch(NavigationState.pushRoute({
       key: 'About',
       title: 'About IngredientInspector'
     }));
   },
-  avoid() {
+  avoids() {
     this.props.dispatch(NavigationState.pushRoute({
       key: 'Avoid',
       title: 'Avoid'
     }));
   },
-  approved() {
+  approveds() {
     this.props.dispatch(NavigationState.pushRoute({
       key: 'Approved',
       title: 'Approved'
     }));
   },
-  contacted() {
+  contacteds() {
     this.props.dispatch(NavigationState.pushRoute({
       key: 'Contacted',
       title: 'Contacted'
     }));
   },
-  concerns() {
+  concernss() {
     this.props.dispatch(NavigationState.pushRoute({
       key: 'Concerns',
       title: 'High-Concern Ingredients'
@@ -83,25 +80,25 @@ const CounterView = React.createClass({
         {this.renderUserInfo()}
 
         <TouchableOpacity
-          onPress={this.approved}>
+          onPress={this.approveds}>
           <Text style={[styles.linkButton]}>
             See your Approved list
           </Text>
         </TouchableOpacity>
 
-        <TouchableOpacity onPress={this.avoid}>
+        <TouchableOpacity onPress={this.avoids}>
           <Text style={styles.linkButton}>
             See your Avoid list
           </Text>
         </TouchableOpacity>
 
-        <TouchableOpacity onPress={this.contacted}>
+        <TouchableOpacity onPress={this.contacteds}>
           <Text style={styles.linkButton}>
             See manufacturers you have contacted
           </Text>
         </TouchableOpacity>
 
-        <TouchableOpacity onPress={this.about} accessible={true}>
+        <TouchableOpacity onPress={this.abouts} accessible={true}>
           <Text style={styles.linkButton}>
             {'About IngredientInspector'}
           </Text>

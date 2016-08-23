@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 import BarcodeScanner from 'react-native-barcodescanner';
 
-class BarcodeScanner extends Component {
+class Scanner extends Component {
   constructor(props) {
     super(props);
 
@@ -67,4 +67,4 @@ const styles = StyleSheet.create({
   },
 });
 
-AppRegistry.registerComponent('BarcodeScanner', () => BarcodeScanner);
+AppRegistry.registerComponent('Scanner', () => Scanner);

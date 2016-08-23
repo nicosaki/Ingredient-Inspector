@@ -4,10 +4,11 @@ import {generateRandomNumber} from '../../services/randomNumberService';
 
 // Initial state
 const initialState = Map({
+  loading: false,
   avoid: [],
   approved: [],
   contacted: [],
-  concerns: []
+  concerns: ''
 });
 
 // Actions
@@ -47,13 +48,13 @@ export default function CounterStateReducer(state = initialState, action = {}) {
       return state.update('concerns', concerns => concerns + action.payload);
 
     case UPDATE_CONTACTED:
-      return state.update('contacted', contacted => contacted + action.payload);
+      return state.update('contacted', contacted => contacted.prototype.concat(action.payload));
 
     case UPDATE_AVOID:
-      return state.update('avoid', avoid => avoid + action.payload);
+      return state.update('avoid', avoid => avoid.prototype.concat(action.payload));
 
     case UPDATE_APPROVED:
-      return state.update('approved', approved => approved + action.payload);
+      return state.update('approved', approved => approved.prototype.concat(action.payload));
 
     default:
       return state;

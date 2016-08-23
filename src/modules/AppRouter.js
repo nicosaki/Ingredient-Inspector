@@ -8,7 +8,7 @@ import ContactedViewContainer from './counter/ContactedViewContainer';
 import ConcernsViewContainer from './counter/ConcernsViewContainer';
 import AboutViewContainer from './counter/AboutViewContainer';
 import ScannerViewContainer from './scanner/ScannerViewContainer';
-import IngredientsViewContainer from './scanner/IngredientsViewContainer';
+import IngredientViewContainer from './scanner/IngredientViewContainer';
 
 /**
  * AppRouter is responsible for mapping a navigator scene to a view
@@ -16,7 +16,7 @@ import IngredientsViewContainer from './scanner/IngredientsViewContainer';
 export default function AppRouter(props) {
   const key = props.scene.route.key;
 
-  if (key === 'Counter') {
+  if (key === 'Home') {
     return <CounterViewContainer />;
   }
 
@@ -41,10 +41,14 @@ export default function AppRouter(props) {
   }
 
   if (key === 'Ingredients') {
-    return <IngredientsViewContainer />;
+    return <IngredientViewContainer />;
   }
 
   if (key === 'Scanner') {
+    return <ScannerViewContainer />;
+  }
+
+  if (key === 'Color') {
     return <ScannerViewContainer />;
   }
 

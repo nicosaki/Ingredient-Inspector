@@ -12,7 +12,13 @@ import CounterStateReducer from '../counter/CounterState'
 const initialState = Map({
   barcode: this.state.barcode,
   loading: true,
-  data: null
+  data: function(){ fetch('https://localhost:3000/' + upc, {
+    method: 'GET',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+    }
+  })}
 });
 
 // ACTION TYPES (Naming: SCREAMING_CASE)

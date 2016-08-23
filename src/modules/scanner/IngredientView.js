@@ -1,4 +1,4 @@
-import * as CounterState from './CounterState';
+import * as CounterState from '../counter/CounterState';
 import * as NavigationState from '../../modules/navigation/NavigationState';
 import React, {PropTypes} from 'react';
 import {
@@ -9,22 +9,6 @@ import {
 } from 'react-native';
 
 const IngredientView = React.createClass({
-  setState('loading', loading => true)
-
-  let upc = this.state.barcode.toString()
-
-  data = fetch('https://localhost:3000/' + upc, {
-  method: 'GET',
-  headers: {
-    'Accept': 'application/json',
-    'Content-Type': 'application/json',
-  }
-  // body: JSON.stringify({
-  //   firstParam: 'yourValue',
-  //   secondParam: 'yourOtherValue',
-  // })
-  })
-
 
 
   propTypes: {
@@ -35,7 +19,7 @@ const IngredientView = React.createClass({
     this.props.dispatch(CounterState.updateContacted(checked));
   },
 
-  update_avoid() {
+  update_avoids() {
     this.props.dispatch(CounterState.updateAvoid(barcode));
   },
 
@@ -64,7 +48,7 @@ const IngredientView = React.createClass({
           </Text>
         </TouchableOpacity>
 
-        <TouchableOpacity onPress={this.avoid}>
+        <TouchableOpacity onPress={this.avoids}>
           <Text style={styles.linkButton}>
             See your Avoid list
           </Text>
@@ -98,17 +82,6 @@ const styles = StyleSheet.create({
   userContainer: {
     justifyContent: 'center',
     alignItems: 'center'
-  },
-  userProfilePhoto: {
-    ...circle,
-    alignSelf: 'center'
-  },
-  counterButton: {
-    ...circle,
-    backgroundColor: 'green',
-    alignItems: 'center',
-    justifyContent: 'center',
-    margin: 20
   },
   counter: {
     color: 'white',

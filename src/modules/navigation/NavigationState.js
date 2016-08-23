@@ -33,14 +33,14 @@ const initialState = fromJS({
   tabs: {
     index: 0,
     routes: [
-      {key: 'HomeTab', title: 'YOUR LISTS'},
+      {key: 'Home', title: 'YOUR LISTS'},
       {key: 'Scanner', title: 'SCAN A BARCODE'}
     ]
   },
   // Scenes for the `HomeTab` tab.
-  HomeTab: {
+  Home: {
     index: 0,
-    routes: [{key: 'Counter', title: 'Counter Screen'}]
+    routes: [{key: 'Home', title: 'YOUR LISTS'}]
   },
   // Scenes for the `ProfileTab` tab.
 
@@ -66,7 +66,7 @@ const initialState = fromJS({
 
   Scanner: {
     index: 0,
-    routes: [{key: 'Scanner', title: 'Scanner'}, {key: 'Ingredients', title: "Ingredients of Potential Concern:"}]
+    routes: [{key: 'Scanner', title: 'SCAN A BARCODE'}, {key: 'Ingredients', title: "Ingredients of Potential Concern:"}]
   }
 });
 
