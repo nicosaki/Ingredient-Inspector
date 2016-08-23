@@ -30,10 +30,10 @@ class Scanner extends Component {
       type: e.type,
     });
 
-    this.props.dispatch(NavigationState.pushRoute({
-      key: 'Ingredients',
-      title: 'Ingredients of Potential Concern'
-    }));
+    // this.props.dispatch(NavigationState.pushRoute({
+    //   key: 'Ingredients',
+    //   title: 'Ingredients of Potential Concern'
+    // }));
   }
 
   render() {
