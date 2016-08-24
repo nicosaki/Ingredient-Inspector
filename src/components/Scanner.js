@@ -68,3 +68,5 @@ const styles = StyleSheet.create({
 });
 
 AppRegistry.registerComponent('Scanner', () => Scanner);
+
+export default Scanner;

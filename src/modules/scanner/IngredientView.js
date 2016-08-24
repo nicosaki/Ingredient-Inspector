@@ -9,8 +9,6 @@ import {
 } from 'react-native';
 
 const IngredientView = React.createClass({
-
-
   propTypes: {
     barcode: PropTypes.string
   },
@@ -31,15 +29,21 @@ const IngredientView = React.createClass({
     this.props.dispatch(CounterState.updateConcerns(checked));
   },
 
+  // getInitialState: function() {
+  //   // naming it initialX clearly indicates that the only purpose
+  //   // of the passed down prop is to initialize something internally
+  //   return {data: this.state.data};
+  // },
+
 
   render() {
     const loadingStyle = this.props.loading
       ? {backgroundColor: '#eee'}
       : null;
 
+
     return (
       <View style={styles.container}>
-        {this.data.ingredients}
 
         <TouchableOpacity
           onPress={this.approved}>
