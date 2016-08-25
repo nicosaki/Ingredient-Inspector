@@ -16,6 +16,9 @@ const CounterView = React.createClass({
     loading: PropTypes.bool.isRequired,
     dispatch: PropTypes.func.isRequired
   },
+  check_if_update() {
+    this.props.dispatch(CounterState.checkIfUpdate());
+  },
   abouts() {
     this.props.dispatch(NavigationState.pushRoute({
       key: 'About',
@@ -78,7 +81,7 @@ const CounterView = React.createClass({
       <View style={styles.container}>
 
         {this.renderUserInfo()}
-
+        
         <TouchableOpacity
           onPress={this.approveds}>
           <Text style={[styles.linkButton]}>

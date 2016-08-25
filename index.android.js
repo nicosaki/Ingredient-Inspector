@@ -25,8 +25,8 @@ const PepperoniAppTemplate = React.createClass({
         AsyncStorage.getItem("contacted").then((value) => {
             this.setState({"contacted": value});
         }).done();
-        AsyncStorage.getItem("id").then((value) => {
-            this.setState({"id": value});
+        AsyncStorage.getItem("user_id").then((value) => {
+            this.setState({"user_id": value});
         }).done();
     },
 

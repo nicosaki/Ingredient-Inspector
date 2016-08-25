@@ -42,8 +42,7 @@ const initialState = fromJS({
     index: 0,
     routes: [{key: 'Home', title: 'YOUR LISTS'}]
   },
-  // Scenes for the `ProfileTab` tab.
-
+  
   Approved: {
     index: 1,
     routes: [{key: 'Approved', title: 'Approved'}]
