@@ -6,7 +6,8 @@ import {
   TouchableOpacity,
   Image,
   Text,
-  View
+  View,
+  TextInput
 } from 'react-native';
 
 const ConcernsView = React.createClass({
@@ -15,23 +16,28 @@ const ConcernsView = React.createClass({
     approved: PropTypes.array
   },
 
+  updateConcerns(concerns) {
+    this.props.dispatch(CounterState.updateConcerns(concerns));
+  },
 
-  renderApprovedList() {
-    // var ApprovedList = (this.state.avoid) //guessing so hard
+  renderConcernsList() {
     if (!this.props.userName) {
       return null;
     }
 
     return (
       <View>
+        <Text>IngredientInspector is a tool to help you discover potentially harmful ingredients in products. It is not a substitute for reading the label. If you have food allergies, ALWAYS read the label.</Text>
+        <Text>Below, add ingredients of personal concern that you want IngredientInspector to watch for. Please type each ingredient separated by a comma, and for maximized safety include bothe singular and pluralized forms of your concern. (eg. 'strawberries, strawberry')</Text>
         <TextInput
             style={styles.formInput}
             onChangeText={(text) => this.saveData(text)}
             value={this.state.concerns} />
+          <button onPress={this.updateConcerns(this.state.concerns)}>Save!</button>
       </View>
     );
   },
-
+//saveData saves text to state.concerns, updateConcerns action takes in state, calls, and updates state again? WATCH FOR WEIRDNESS
   render() {
     const loadingStyle = this.props.loading
       ? {backgroundColor: '#eee'}
@@ -39,7 +45,7 @@ const ConcernsView = React.createClass({
 
     return (
       <View style={styles.container}>
-        {this.renderApprovedList()}
+        {this.renderConcernsList()}
       </View>
     );
   }

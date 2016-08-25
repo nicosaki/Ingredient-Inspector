@@ -81,7 +81,14 @@ const CounterView = React.createClass({
       <View style={styles.container}>
 
         {this.renderUserInfo()}
-        
+
+        <TouchableOpacity
+          onPress={this.concernss}>
+          <Text style={[styles.linkButton]}>
+            View and edit your Concerns list
+          </Text>
+        </TouchableOpacity>
+
         <TouchableOpacity
           onPress={this.approveds}>
           <Text style={[styles.linkButton]}>

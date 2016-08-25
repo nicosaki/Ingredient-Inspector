@@ -18,25 +18,10 @@ const UPDATE_AVOID = 'CounterState/UPDATE_AVOID';
 const UPDATE_APPROVED = 'CounterState/UPDATE_APPROVED';
 const UPDATE_CONTACTED = 'CounterState/UPDATE_CONTACTED';
 const RETRIEVE_USER = 'CounterState/RETRIEVE_USER';
-// const USER_ID = state.getIn(['auth', 'user_id'])
-
-// Action creators
-
-// export function checkIfUpdate() {
-//   return function(dispatch, getState) {
-//     let currentState = getState
-//     console.log("STATE FOR UPDATING: ", currentState)
-//     if (!currentState.user_id) {
-//       profile = currentState.currentUser
-//       dispatch(retrieveUser(profile));
-//     } else {
-//       dispatch(returnState());
-//     }
-//   }
 
 
-export function updateConcerns(new_concerns, userId = '1') {
-  fetch('http://localhost:3000/user/' + userId, {
+export function updateConcerns(new_concerns, USER_ID) {
+  fetch('http://10.0.3.2:3000/user/' + USER_ID, {
     method: 'POST',
     headers: {
       'Accept': 'application/json',
