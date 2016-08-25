@@ -4,7 +4,8 @@ import {Map, fromJS} from 'immutable';
 const initialState = Map({
   isLoggedIn: false,
   currentUser: null,
-  authenticationToken: null
+  authenticationToken: null,
+  user_id: null
 });
 
 // Actions
@@ -12,13 +13,40 @@ const USER_LOGIN_SUCCESS = 'AppState/USER_LOGIN_SUCCESS';
 const USER_LOGIN_ERROR = 'AppState/USER_LOGIN_ERROR';
 
 export function onUserLoginSuccess(profile, token) {
-  return {
-    type: USER_LOGIN_SUCCESS,
-    payload: {
-      profile: fromJS(profile),
-      token: fromJS(token)
+  const USER = profile
+  return fetch('http://localhost:3000/user/login', {
+    method: 'POST',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      profile: USER,
+    })
+  })
+  .then(response => {
+    if (response.status >= 200 && response.status < 300) {
+      console.log("API RESPONSE: ", response);
+      let data = response.parse().id
+      return {
+        type: USER_LOGIN_SUCCESS,
+        payload: {
+          profile: fromJS(profile),
+          token: fromJS(token),
+          user_id: data
+        }
+      };
+    } else {
+      console.log("WHAT IS HAPPENING")
+      const error = new Error(response.statusText);
+      error.response = response;
+      return {
+        type: USER_LOGIN_ERROR,
+        payload: error,
+        error: true
+      };
     }
-  };
+  })
 }
 
 export function onUserLoginError(error) {
@@ -36,7 +64,8 @@ export default function AuthStateReducer(state = initialState, action = {}) {
       return state
         .set('isLoggedIn', true)
         .set('currentUser', action.payload.profile)
-        .set('authenticationToken', action.payload.token);
+        .set('authenticationToken', action.payload.token)
+        .set('user_id', action.payload.id);
     case USER_LOGIN_ERROR:
       return initialState;
     default:
