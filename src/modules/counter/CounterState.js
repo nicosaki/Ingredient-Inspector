@@ -34,8 +34,8 @@ export function updateConcerns(new_concerns, USER_ID) {
   return {type: UPDATE_CONCERNS, payload: checked};
 }
 
-export function updateContacted(upc, userId = '1') {
-  fetch('http://localhost:3000/user/' + userId + '/' + upc, {
+export function updateContacted(upc, USER_ID = '1') {
+  fetch('http://10.0.3.2:3000/user/' + USER_ID + '/' + upc, {
     method: 'POST',
     headers: {
       'Accept': 'application/json',
@@ -45,8 +45,8 @@ export function updateContacted(upc, userId = '1') {
   return {type: UPDATE_CONTACTED, payload: upc};
 }
 
-export function updateAvoid(upc, userId = '1') {
-  fetch('http://localhost:3000/user/' + userId + '/avoid/' + upc, {
+export function updateAvoid(upc, USER_ID = '1') {
+  fetch('http://10.0.3.2:3000/user/' + USER_ID + '/avoid/' + upc, {
     method: 'POST',
     headers: {
       'Accept': 'application/json',
@@ -56,8 +56,8 @@ export function updateAvoid(upc, userId = '1') {
   return {type: UPDATE_AVOID, payload: upc};
 }
 
-export function updateApproved(upc, userId = '1') {
-  fetch('http://localhost:3000/user/' + userId + '/appoved/' + upc, {
+export function updateApproved(upc, USER_ID = '1') {
+  fetch('http://10.0.3.2:3000/user/' + USER_ID + '/appoved/' + upc, {
     method: 'POST',
     headers: {
       'Accept': 'application/json',
