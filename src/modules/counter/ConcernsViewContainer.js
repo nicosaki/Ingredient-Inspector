@@ -3,6 +3,7 @@ import ConcernsView from './ConcernsView';
 
 export default connect(
   state => ({
-    avoid: state.getIn(['counter', 'avoid'])
+    concerns: state.getIn(['counter', 'concerns']),
+    user_id: state.getIn(['auth', 'user_id'])
   })
 )(ConcernsView);

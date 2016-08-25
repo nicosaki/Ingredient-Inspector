@@ -3,6 +3,7 @@ import ContactedView from './ContactedView';
 
 export default connect(
   state => ({
-    avoid: state.getIn(['counter', 'avoid'])
+    contacted: state.getIn(['counter', 'contacted']),
+    user_id: state.getIn(['auth', 'user_id'])
   })
 )(ContactedView);

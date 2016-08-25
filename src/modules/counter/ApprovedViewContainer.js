@@ -3,6 +3,7 @@ import ApprovedView from './ApprovedView';
 
 export default connect(
   state => ({
-    avoid: state.getIn(['counter', 'avoid'])
+    approved: state.getIn(['counter', 'approved']),
+    user_id: state.getIn(['auth', 'user_id'])
   })
 )(ApprovedView);

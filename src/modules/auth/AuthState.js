@@ -14,7 +14,7 @@ const USER_LOGIN_ERROR = 'AppState/USER_LOGIN_ERROR';
 
 export function onUserLoginSuccess(profile, token) {
   const USER = profile
-  return fetch('http://localhost:3000/user/login', {
+  return fetch('http://10.0.3.2:3000/user/login', {
     method: 'POST',
     headers: {
       'Accept': 'application/json',
@@ -27,7 +27,10 @@ export function onUserLoginSuccess(profile, token) {
   .then(response => {
     if (response.status >= 200 && response.status < 300) {
       console.log("API RESPONSE: ", response);
-      let data = response.parse().id
+      let data = JSON.parse(response._bodyText)
+      console.log("DATA: ", data)
+      data = data.id
+      console.log("ID: ", data)
       return {
         type: USER_LOGIN_SUCCESS,
         payload: {
