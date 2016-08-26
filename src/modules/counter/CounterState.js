@@ -17,7 +17,7 @@ const UPDATE_CONCERNS = 'CounterState/UPDATE_CONCERNS';
 const UPDATE_AVOID = 'CounterState/UPDATE_AVOID';
 const UPDATE_APPROVED = 'CounterState/UPDATE_APPROVED';
 const UPDATE_CONTACTED = 'CounterState/UPDATE_CONTACTED';
-const RETRIEVE_USER = 'CounterState/RETRIEVE_USER';
+const GET_USER_ID = 'CounterState/GET_USER_ID';
 
 
 export function updateConcerns(new_concerns, user_id = 1) {
@@ -35,28 +35,37 @@ export function updateConcerns(new_concerns, user_id = 1) {
 }
 
 export function updateContacted(upc, user_id = '1') {
-  fetch('http://10.0.3.2:3000/user/' + user_id + '/' + upc, {
-    method: 'POST',
-    headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json',
-    }
-  })
-  return {type: UPDATE_CONTACTED, payload: upc};
+  if (upc) {
+    fetch('http://10.0.3.2:3000/user/' + user_id + '/' + upc, {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      }
+    })
+    return {type: UPDATE_CONTACTED, payload: upc};
+  } else {
+    return {type: UPDATE_CONTACTED, payload: []};
+  }
 }
 
 export function updateAvoid(upc, user_id = '1') {
-  fetch('http://10.0.3.2:3000/user/' + user_id + '/avoid/' + upc, {
-    method: 'POST',
-    headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json',
-    }
-  })
-  return {type: UPDATE_AVOID, payload: upc};
+  if (upc) {
+    fetch('http://10.0.3.2:3000/user/' + user_id + '/avoid/' + upc, {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      }
+    })
+    return {type: UPDATE_AVOID, payload: upc};
+  } else {
+    return {type: UPDATE_AVOID, payload: []};
+  }
 }
 
 export function updateApproved(upc, user_id = '1') {
+  if (upc) {
   fetch('http://10.0.3.2:3000/user/' + user_id + '/appoved/' + upc, {
     method: 'POST',
     headers: {
@@ -65,6 +74,13 @@ export function updateApproved(upc, user_id = '1') {
     }
   })
   return {type: UPDATE_APPROVED, payload: upc};
+} else {
+  return {type: UPDATE_APPROVED, payload: []};
+}
+}
+
+export function getUserId() {
+  return {type: GET_USER_ID};
 }
 
 // export async function requestRandomNumber() {
@@ -77,24 +93,27 @@ export function updateApproved(upc, user_id = '1') {
 // Reducer
 export default function CounterStateReducer(state = initialState, action = {}) {
   switch (action.type) {
-    case RETRIEVE_USER:
-      return state
-        .update('user_id', user_id => action.payload.user_id)
-        .update('avoid', avoid => action.payload.avoid)
-        .update('approved', approved => action.payload.approved)
-        .update('concerns', concerns => action.payload.concerns)
-        .update('contacted', contacted => action.payload.contacted);
+    // case RETRIEVE_USER:
+      // return state
+      //   .update('user_id', user_id => action.payload.user_id)
+      //   .update('avoid', avoid => action.payload.avoid)
+      //   .update('approved', approved => action.payload.approved)
+      //   .update('concerns', concerns => action.payload.concerns)
+      //   .update('contacted', contacted => action.payload.contacted);
     case UPDATE_CONCERNS:
       return state.update('concerns', concerns => concerns + action.payload);
 
     case UPDATE_CONTACTED:
-      return state.update('contacted', contacted => contacted.prototype.concat(action.payload));
+      return state.update('contacted', contacted => contacted.concat(action.payload));
 
     case UPDATE_AVOID:
-      return state.update('avoid', avoid => avoid.prototype.concat(action.payload));
+      return state.update('avoid', avoid => avoid.concat(action.payload));
 
     case UPDATE_APPROVED:
-      return state.update('approved', approved => approved.prototype.concat(action.payload));
+      return state.update('approved', approved => approved.concat(action.payload));
+
+    case GET_USER_ID:
+      return state.id;
 
     default:
       return state;

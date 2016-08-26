@@ -7,6 +7,6 @@ import IngredientView from './IngredientView';
 export default connect(
   state => ({
     barcode: state.getIn(['scanner', 'barcode']),
-    data: state.getIn['counter', 'data']
+    data: state.getIn(['counter', 'data'])
   })
 )(IngredientView);

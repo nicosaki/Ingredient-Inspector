@@ -11,7 +11,11 @@ import {loop, Effects} from 'redux-loop';
 
 const initialState = Map({
   barcode: '',
-  loading: true
+  loading: true,
+  avoid: [],
+  approved: [],
+  contacted: [],
+  concerns: ''
 });
 
 // ACTION TYPES (Naming: SCREAMING_CASE)

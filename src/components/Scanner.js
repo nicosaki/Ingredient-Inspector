@@ -21,12 +21,7 @@ class Scanner extends Component {
     };
   }
 
-  ingredients() {
-    this.props.dispatch(NavigationState.pushRoute({
-      key: 'Ingredients',
-      title: 'Ingredients of Potential Concern'
-    }));
-  }
+
 
   barcodeReceived(e) {
     if (e.data !== this.state.barcode || e.type !== this.state.type) Vibration.vibrate();
@@ -36,9 +31,10 @@ class Scanner extends Component {
       text: `${e.data} (${e.type})`,
       type: e.type,
     });
-    if (this.state.barcode) {
-      ingredients();
-    }
+    this.props.dispatch(NavigationState.pushRoute({
+      key: 'Ingredients',
+      title: 'Ingredients of Potential Concern'
+    }));
   }
 
 
