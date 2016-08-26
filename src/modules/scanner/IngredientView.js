@@ -5,72 +5,97 @@ import {
   StyleSheet,
   TouchableOpacity,
   Text,
-  View
+  View,
+  Switch
 } from 'react-native';
 
 const IngredientView = React.createClass({
   propTypes: {
-    barcode: PropTypes.string
+    barcode: PropTypes.string,
+    data: PropTypes.object,
+    showResults: PropTypes.bool
   },
 
-  contact_manufacturer(checked) {
-    this.props.dispatch(CounterState.updateContacted(checked));
+  contact_manufacturer(upc) {
+    this.props.dispatch(CounterState.updateContacted(upc));
   },
 
-  update_avoids() {
-    this.props.dispatch(CounterState.updateAvoid(barcode));
+  update_avoids(upc) {
+    this.props.dispatch(CounterState.updateAvoid(upc));
   },
 
-  update_approved() {
-    this.props.dispatch(CounterState.updateApproved(barcode));
+  update_approved(upc) {
+    this.props.dispatch(CounterState.updateApproved(upc));
   },
 
-  update_concerns(checked) {
-    this.props.dispatch(CounterState.updateConcerns(checked));
+  toggleVisibility(show) {
+    if (show !== false) {
+      this.setState({ showResults: false });
+    } else {
+      this.setState({ showResults: true})
+    }
   },
 
-  // getInitialState: function() {
-  //   // naming it initialX clearly indicates that the only purpose
-  //   // of the passed down prop is to initialize something internally
-  //   return {data: this.state.data};
+  // update_concerns(checked) {
+  //   this.props.dispatch(CounterState.updateConcerns(checked));
   // },
+//   displayDetails() {
+//     if (this.state.showResults) {
+//       return (
+//             <TouchableHighlight
+//                 onPress={this.toggleCancel()}>
+//                 <View>
+//                     <Text style={styles.cancelButtonText}>Cancel</Text>
+//                 </View>
+//             </TouchableHighlight>
+//         );
+//     } else {
+//       return null;
+//     }
+// }
+
 
 
   render() {
+    var ingredients = this.state.data.ingredients
+    var upc = this.state.barcode
+    var id = this.state.user_id
     const loadingStyle = this.props.loading
       ? {backgroundColor: '#eee'}
       : null;
 
 
     return (
+      <View>
+        <ul>
+         {ingredients.map(function(ingredient, index){
+             return <li key={ index }>{ingredient.name}</li>;
+           })}
+
+        </ul>
+
       <View style={styles.container}>
 
         <TouchableOpacity
-          onPress={this.approved}>
-          <Text style={[styles.linkButton]}>
-            See your Approved list
+          onPress={this.update_approved(upc)}>
+          <Text style={[styles.linkButton, styles.green]}>
+            Add this product to your Approved list
           </Text>
         </TouchableOpacity>
 
-        <TouchableOpacity onPress={this.avoids}>
-          <Text style={styles.linkButton}>
-            See your Avoid list
+        <TouchableOpacity onPress={this.update_avoids(upc)}>
+          <Text style={styles.linkButton, styles.red}>
+            Add this product to your Avoid list
           </Text>
         </TouchableOpacity>
 
-        <TouchableOpacity onPress={this.contacted}>
-          <Text style={styles.linkButton}>
-            See manufacturers you have contacted
+        <TouchableOpacity onPress={this.contact_manufacturer(upc)}>
+          <Text style={styles.linkButton, styles.blue}>
+            Contact the manufacturer
           </Text>
         </TouchableOpacity>
-
-        <TouchableOpacity onPress={this.about} accessible={true}>
-          <Text style={styles.linkButton}>
-            {'About IngredientInspector'}
-          </Text>
-        </TouchableOpacity>
-
       </View>
+    </View>
     );
   }
 });

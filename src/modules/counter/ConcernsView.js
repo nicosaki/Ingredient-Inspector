@@ -27,17 +27,19 @@ const ConcernsView = React.createClass({
 
     return (
       <View>
-        <Text>IngredientInspector is a tool to help you discover potentially harmful ingredients in products. It is not a substitute for reading the label. If you have food allergies, ALWAYS read the label.</Text>
-        <Text>Below, add ingredients of personal concern that you want IngredientInspector to watch for. Please type each ingredient separated by a comma, and for maximized safety include bothe singular and pluralized forms of your concern. (eg. 'strawberries, strawberry')</Text>
+        <Text style={styles.text}>IngredientInspector is a tool to help you discover potentially harmful ingredients in products. It is not a substitute for reading the label. If you have food allergies, ALWAYS read the label.</Text>
+        <Text style={styles.text}>Below, add ingredients of personal concern that you want IngredientInspector to check for. Please type each ingredient separated by a comma, and for maximized safety include bothe singular and pluralized forms of your concern. (eg. 'strawberries, strawberry') Be aware that IngedientInspector directly compares your input below to product ingredients, so errors here will result in errors in results</Text>
+      <View style={styles.inputContainer}>
         <TextInput
-            style={styles.formInput}
-            onChangeText={(text) => this.saveData(text)}
+            autoFocus={true}
+            style={styles.textInput}
+            onChangeText={(concerns) => this.setState({concerns})}
             value={this.state.concerns} />
-          <button onPress={this.updateConcerns(this.state.concerns)}>Save!</button>
       </View>
+    </View>
     );
   },
-//saveData saves text to state.concerns, updateConcerns action takes in state, calls, and updates state again? WATCH FOR WEIRDNESS
+
   render() {
     const loadingStyle = this.props.loading
       ? {backgroundColor: '#eee'}
@@ -51,13 +53,6 @@ const ConcernsView = React.createClass({
   }
 });
 
-const circle = {
-  borderWidth: 0,
-  borderRadius: 40,
-  width: 80,
-  height: 80
-};
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -65,37 +60,44 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: 'white'
   },
-  userContainer: {
+  formInput: {
     justifyContent: 'center',
-    alignItems: 'center'
-  },
-  userProfilePhoto: {
-    ...circle,
-    alignSelf: 'center'
-  },
-  counterButton: {
-    ...circle,
-    backgroundColor: 'green',
     alignItems: 'center',
-    justifyContent: 'center',
-    margin: 20
+    width: 200,
+    height: 300,
+    backgroundColor: 'red'
   },
-  counter: {
-    color: 'white',
-    fontSize: 20,
-    textAlign: 'center'
+  textInput: {
+    color: '#ffffff',
+    flex: 1,
+    width: 60,
+    height: 60,
+    fontSize: 16
   },
-  welcome: {
-    textAlign: 'center',
-    color: 'black',
-    marginBottom: 5,
-    padding: 5
+  inputContainer: {
+    borderBottomColor: '#9E7CE3',
+    borderBottomWidth: 1,
+    flex: 1,
+    flexDirection: 'row',
+    marginBottom: 10
+  },
+  title: {
+    fontFamily: 'Overpass-Bold',
+    height: 40,
+    width: 40
+  },
+  body: {
+    fontFamily: 'Overpass-Bold',
+    flex: 1
   },
   linkButton: {
     textAlign: 'center',
     color: '#CCCCCC',
     marginBottom: 10,
     padding: 5
+  },
+  text: {
+    color: 'black'
   }
 });
 
