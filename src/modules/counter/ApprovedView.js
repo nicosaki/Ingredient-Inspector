@@ -11,7 +11,6 @@ import {
 
 const ApprovedView = React.createClass({
   propTypes: {
-    //UNSURE IF ARRAY IS LEGIT
     approved: PropTypes.array
   },
 

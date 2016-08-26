@@ -20,8 +20,8 @@ const UPDATE_CONTACTED = 'CounterState/UPDATE_CONTACTED';
 const RETRIEVE_USER = 'CounterState/RETRIEVE_USER';
 
 
-export function updateConcerns(new_concerns, USER_ID) {
-  fetch('http://10.0.3.2:3000/user/' + USER_ID, {
+export function updateConcerns(new_concerns, user_id = 1) {
+  fetch('http://10.0.3.2:3000/user/' + user_id, {
     method: 'POST',
     headers: {
       'Accept': 'application/json',
@@ -34,8 +34,8 @@ export function updateConcerns(new_concerns, USER_ID) {
   return {type: UPDATE_CONCERNS, payload: checked};
 }
 
-export function updateContacted(upc, USER_ID = '1') {
-  fetch('http://10.0.3.2:3000/user/' + USER_ID + '/' + upc, {
+export function updateContacted(upc, user_id = '1') {
+  fetch('http://10.0.3.2:3000/user/' + user_id + '/' + upc, {
     method: 'POST',
     headers: {
       'Accept': 'application/json',
@@ -45,8 +45,8 @@ export function updateContacted(upc, USER_ID = '1') {
   return {type: UPDATE_CONTACTED, payload: upc};
 }
 
-export function updateAvoid(upc, USER_ID = '1') {
-  fetch('http://10.0.3.2:3000/user/' + USER_ID + '/avoid/' + upc, {
+export function updateAvoid(upc, user_id = '1') {
+  fetch('http://10.0.3.2:3000/user/' + user_id + '/avoid/' + upc, {
     method: 'POST',
     headers: {
       'Accept': 'application/json',
@@ -56,8 +56,8 @@ export function updateAvoid(upc, USER_ID = '1') {
   return {type: UPDATE_AVOID, payload: upc};
 }
 
-export function updateApproved(upc, USER_ID = '1') {
-  fetch('http://10.0.3.2:3000/user/' + USER_ID + '/appoved/' + upc, {
+export function updateApproved(upc, user_id = '1') {
+  fetch('http://10.0.3.2:3000/user/' + user_id + '/appoved/' + upc, {
     method: 'POST',
     headers: {
       'Accept': 'application/json',

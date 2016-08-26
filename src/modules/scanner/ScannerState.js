@@ -1,9 +1,6 @@
-
-
-
-
 // NOT  CURRENTLY CONNECTED IN REDUCER; MAY BE TRASH
 import {Map} from 'immutable';
+import {loop, Effects} from 'redux-loop';
 
 // INITIAL STATE
 //
