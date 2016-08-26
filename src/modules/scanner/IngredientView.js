@@ -7,7 +7,7 @@ import {
   TouchableOpacity,
   Text,
   View,
-  Switch
+  Button
 } from 'react-native';
 
 const IngredientView = React.createClass({
@@ -34,11 +34,19 @@ const IngredientView = React.createClass({
   },
 
   get_ingredients(upc) {
-    this.props.dispatch(IngredientState.queryBarcode(upc));
+    if (upc === null) {return null}
+    this.props.dispatch(IngredientState.getIngredients(upc));
   },
 
   get_upc() {
     this.props.dispatch(IngredientState.getUpc());
+  },
+
+  open_scanner() {
+    this.props.dispatch(NavigationState.pushRoute({
+      key: 'Scanner',
+      title: 'SCAN A BARCODE'
+    }));
   },
 
   // toggleVisibility(show) {
@@ -49,17 +57,25 @@ const IngredientView = React.createClass({
   //   }
   // },
 
-  if_ingredients(ingredients) {
-    var ingredients = this.get_ingredients(upc)
-    if (ingredients.message === "No ingredients added" || !ingredients || ingredients.status === 0) {
-      return "IngredientInspector relies on Open Food Facts, a crowd-sourced database of products around the world. Unfortunately, this product or its ingredients are not in the database. You can contribute to their project to improve open-source data and improve IngredientInspector at openfoodfacts.org/data"
-    } else {
-        <ul>
-         {ingredients.map(function(ingredient, index){
-             return <li key={ index }>{ingredient.name}</li>;
-           })}
-           //status, warnings
-        </ul>
+  if_ingredients() {
+    var upc = this.get_upc();
+    if (upc === '') {
+      return <Text></Text>
+    }
+    var ingredients = this.get_ingredients(upc);
+    if (ingredients === null) {
+      return <Text></Text>
+    }
+    if (ingredients && ingredients.message !== "No ingredients added" && ingredients.status !== 0) {
+      return
+          <ul>
+           {ingredients.map(function(ingredient, index){
+               return <li key={ index }>{ingredient.name}</li>;
+             })}
+             //status, warnings
+          </ul>
+      }else {
+      return <Text>IngredientInspector relies on Open Food Facts, a crowd-sourced database of products around the world. Unfortunately, this product or its ingredients are not in the database. You can contribute to their project to improve open-source data and improve IngredientInspector at openfoodfacts.org/data</Text>
     }
   },
   // update_concerns(checked) {
@@ -81,42 +97,42 @@ const IngredientView = React.createClass({
 // }
 
 
-
   render() {
-    var id = this.get_user_id()
-    var upc = this.get_upc()
+
     // id = id.auth.user_id
     const loadingStyle = this.props.loading
       ? {backgroundColor: '#eee'}
       : null;
 
-
-
     return (
-      <View onBeginProcessingChildContext={this.if_ingredients()}>
 
       <View style={styles.container}>
 
         <TouchableOpacity
-          onPress={this.update_approved(upc, id)}>
+          onPress={this.update_approved(this.get_upc(), this.get_user_id())}>
           <Text style={[styles.linkButton, styles.green]}>
             Add this product to your Approved list
           </Text>
         </TouchableOpacity>
 
-        <TouchableOpacity onPress={this.update_avoid(upc, id)}>
+        <TouchableOpacity onPress={this.update_avoid(this.get_upc(), this.get_user_id())}>
           <Text style={styles.linkButton, styles.red}>
             Add this product to your Avoid list
           </Text>
         </TouchableOpacity>
 
-        <TouchableOpacity onPress={this.contact_manufacturer(upc, id)}>
+        <TouchableOpacity onPress={this.contact_manufacturer(this.get_upc(), this.get_user_id())}>
           <Text style={styles.linkButton, styles.blue}>
             Contact the manufacturer
           </Text>
         </TouchableOpacity>
+
+        <TouchableOpacity onPress={this.open_scanner()}>
+          <Text style={styles.linkButton, styles.blue}>
+            Scan a product
+          </Text>
+        </TouchableOpacity>
       </View>
-    </View>
     );
   }
 });

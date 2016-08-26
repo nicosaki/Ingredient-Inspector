@@ -34,7 +34,7 @@ const initialState = fromJS({
     index: 0,
     routes: [
       {key: 'Home', title: 'YOUR LISTS'},
-      {key: 'Scanner', title: 'SCAN A BARCODE'}
+      {key: 'Ingredients', title: 'Check Ingredients'}
     ]
   },
   // Scenes for the `HomeTab` tab.
@@ -42,7 +42,7 @@ const initialState = fromJS({
     index: 0,
     routes: [{key: 'Home', title: 'YOUR LISTS'}]
   },
-  
+
   Approved: {
     index: 1,
     routes: [{key: 'Approved', title: 'Approved'}]
@@ -64,9 +64,15 @@ const initialState = fromJS({
   },
 
   Scanner: {
+    index: 1,
+    routes: [{key: 'Scanner', title: 'SCAN A BARCODE'}]
+  },
+
+  Ingredients: {
     index: 0,
-    routes: [{key: 'Scanner', title: 'SCAN A BARCODE'}, {key: 'Ingredients', title: "Ingredients of Potential Concern:"}]
+    routes: [{key: 'Ingredients', title: "Ingredients of Potential Concern:"}]
   }
+
 });
 
 export default function NavigationReducer(state = initialState, action) {

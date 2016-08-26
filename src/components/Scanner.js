@@ -30,6 +30,7 @@ class Scanner extends Component {
       barcode: e.data,
       text: `${e.data} (${e.type})`,
       type: e.type,
+      scanned: true
     });
     this.props.dispatch(NavigationState.pushRoute({
       key: 'Ingredients',
