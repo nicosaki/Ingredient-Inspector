@@ -66,6 +66,9 @@ const IngredientView = React.createClass({
     if (ingredients === null) {
       return <Text></Text>
     }
+    if (ingredients.message === "No flagged ingredients") {
+      return <Text>No ingredients of concern! </Text>
+    }
     if (ingredients && ingredients.message !== "No ingredients added" && ingredients.status !== 0) {
       return
           <ul>
@@ -127,7 +130,7 @@ const IngredientView = React.createClass({
           </Text>
         </TouchableOpacity>
 
-        <TouchableOpacity onPress={this.open_scanner()}>
+        <TouchableOpacity onPress={this.open_scanner}>
           <Text style={styles.linkButton, styles.blue}>
             Scan a product
           </Text>

@@ -4,6 +4,8 @@ import NavigationStateReducer from '../modules/navigation/NavigationState';
 import AuthStateReducer from '../modules/auth/AuthState';
 import CounterStateReducer from '../modules/counter/CounterState';
 import SessionStateReducer, {RESET_STATE} from '../modules/session/SessionState';
+import IngredientStateReducer from '../modules/scanner/IngredientState';
+
 
 const reducers = {
   // Authentication/login state
@@ -16,11 +18,11 @@ const reducers = {
   //`navigationState`
   navigationState: NavigationStateReducer,
 
-  session: SessionStateReducer
+  session: SessionStateReducer,
   //
   // scanner: ScannerStateReducer
 
-  // lists: ListStateReducer
+  ingredients: IngredientStateReducer
 
 };
 

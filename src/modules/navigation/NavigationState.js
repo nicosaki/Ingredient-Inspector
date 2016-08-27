@@ -70,7 +70,7 @@ const initialState = fromJS({
 
   Ingredients: {
     index: 0,
-    routes: [{key: 'Ingredients', title: "Ingredients of Potential Concern:"}]
+    routes: [{key: 'Ingredients', title: "Check Ingredients"}]
   }
 
 });
