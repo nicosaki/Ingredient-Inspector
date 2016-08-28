@@ -7,6 +7,7 @@ import {
   View
 } from 'react-native';
 import BarcodeScanner from 'react-native-barcodescanner';
+import NavigationState from '../modules/navigation/NavigationState'
 
 class Scanner extends Component {
   constructor(props) {
@@ -32,10 +33,8 @@ class Scanner extends Component {
       type: e.type,
       scanned: true
     });
-    this.props.dispatch(NavigationState.pushRoute({
-      key: 'Ingredients',
-      title: 'Ingredients of Potential Concern'
-    }));
+
+    this.props.dispatch(NavigationState.popRoute();
   }
 
 
