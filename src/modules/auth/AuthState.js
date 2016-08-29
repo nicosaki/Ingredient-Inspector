@@ -14,7 +14,7 @@ const USER_LOGIN_ERROR = 'AppState/USER_LOGIN_ERROR';
 
 export function onUserLoginSuccess(profile, token) {
   const USER = profile
-  return fetch('http://10.0.2.2:3000/user/login', {
+  return fetch('https://ingredientinspector-serve.herokuapp.com/user/login', {
     method: 'POST',
     headers: {
       'Accept': 'application/json',

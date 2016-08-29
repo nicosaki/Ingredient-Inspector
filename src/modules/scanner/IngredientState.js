@@ -26,7 +26,7 @@ const GET_UPC = 'IngredientState/GET_UPC';
 
 // ACTION CREATORS (Naming: camelCase)
 export function queryBarcode(upc) {
-  return fetch('http://10.0.3.2:3000/ingredients/' + upc.toString(), {
+  return fetch('https://ingredientinspector-serve.herokuapp.com/ingredients/' + upc.toString(), {
     method: 'GET',
     headers: {
       'Accept': 'application/json',

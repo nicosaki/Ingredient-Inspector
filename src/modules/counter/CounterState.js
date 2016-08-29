@@ -21,7 +21,7 @@ const GET_USER_ID = 'CounterState/GET_USER_ID';
 
 
 export function updateConcerns(new_concerns, user_id = 1) {
-  fetch('http://10.0.2.2:3000/user/' + user_id, {
+  fetch('https://ingredientinspector-serve.herokuapp.com/user/' + user_id, {
     method: 'POST',
     headers: {
       'Accept': 'application/json',
@@ -36,7 +36,7 @@ export function updateConcerns(new_concerns, user_id = 1) {
 
 export function updateContacted(upc, user_id = '1') {
   if (upc) {
-    fetch('http://10.0.2.2:3000/user/' + user_id + '/' + upc, {
+    fetch('https://ingredientinspector-serve.herokuapp.com/user/' + user_id + '/' + upc, {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
@@ -51,7 +51,7 @@ export function updateContacted(upc, user_id = '1') {
 
 export function updateAvoid(upc, user_id = '1') {
   if (upc) {
-    fetch('http://10.0.2.2:3000/user/' + user_id + '/avoid/' + upc, {
+    fetch('https://ingredientinspector-serve.herokuapp.com/user/' + user_id + '/avoid/' + upc, {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
@@ -66,7 +66,7 @@ export function updateAvoid(upc, user_id = '1') {
 
 export function updateApproved(upc, user_id = '1') {
   if (upc) {
-  fetch('http://10.0.2.2:3000/user/' + user_id + '/appoved/' + upc, {
+  fetch('https://ingredientinspector-serve.herokuapp.com/user/' + user_id + '/appoved/' + upc, {
     method: 'POST',
     headers: {
       'Accept': 'application/json',
