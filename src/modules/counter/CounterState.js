@@ -104,13 +104,13 @@ export default function CounterStateReducer(state = initialState, action = {}) {
       return state.update('concerns', concerns => concerns + action.payload);
 
     case UPDATE_CONTACTED:
-      return state.update('contacted', contacted => contacted.concat(action.payload)).uniq();
+      return state.update('contacted', contacted => contacted.concat(action.payload));
 
     case UPDATE_AVOID:
-      return state.update('avoid', avoid => avoid.concat(action.payload)).uniq();
+      return state.update('avoid', avoid => avoid.concat(action.payload));
 
     case UPDATE_APPROVED:
-      return state.update('approved', approved => approved.concat(action.payload)).uniq();
+      return state.update('approved', approved => approved.concat(action.payload));
 
     case GET_USER_ID:
       return state.id;
