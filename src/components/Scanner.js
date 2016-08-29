@@ -28,10 +28,10 @@ class Scanner extends Component {
   // }
 
   barcodeReceived(e) {
-    // if (e.data !== this.state.barcode || e.type !== this.state.type) Vibration.vibrate();
+    if (e.data !== this.state.barcode || e.type !== this.state.type) Vibration.vibrate();
 
     this.setState({
-      barcode: '737628064502',
+      barcode: e.data,
       text: `${e.data} (${e.type})`,
       type: e.type,
       scanned: true
@@ -48,7 +48,7 @@ class Scanner extends Component {
     return (
       <View style={styles.container}>
         <BarcodeScanner
-          onDrag={this.barcodeReceived.bind(this)}
+          onBarCodeRead={this.barcodeReceived.bind(this)}
           style={{ flex: 1 }}
           torchMode={this.state.torchMode}
           cameraType={this.state.cameraType}
