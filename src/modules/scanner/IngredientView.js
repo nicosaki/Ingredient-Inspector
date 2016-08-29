@@ -45,7 +45,12 @@ const IngredientView = React.createClass({
   open_scanner() {
     this.props.dispatch(NavigationState.pushRoute({
       key: 'Scanner',
-      title: 'SCAN A BARCODE'
+      title: 'SCAN A BARCODE',
+      params: {
+        getFeedBack: function(text) {
+          // _this.setState({feedback: text});
+        }
+      }
     }));
   },
 
@@ -113,26 +118,26 @@ const IngredientView = React.createClass({
 
         <TouchableOpacity
           onPress={this.update_approved(this.get_upc(), this.get_user_id())}>
-          <Text style={[styles.linkButton, styles.green]}>
-            Add this product to your Approved list
+          <Text style={[styles.linkGreenButton]}>
+            +Approved
           </Text>
         </TouchableOpacity>
 
         <TouchableOpacity onPress={this.update_avoid(this.get_upc(), this.get_user_id())}>
-          <Text style={styles.linkButton, styles.red}>
-            Add this product to your Avoid list
+          <Text style={styles.linkRedButton}>
+            +Avoid
           </Text>
         </TouchableOpacity>
 
         <TouchableOpacity onPress={this.contact_manufacturer(this.get_upc(), this.get_user_id())}>
-          <Text style={styles.linkButton, styles.blue}>
-            Contact the manufacturer
+          <Text style={styles.linkBlueButton}>
+            Contact manufacturer
           </Text>
         </TouchableOpacity>
 
         <TouchableOpacity onPress={this.open_scanner}>
-          <Text style={styles.linkButton, styles.blue}>
-            Scan a product
+          <Text style={styles.linkBlackButton}>
+            Scan product
           </Text>
         </TouchableOpacity>
       </View>
@@ -168,6 +173,43 @@ const styles = StyleSheet.create({
     color: '#CCCCCC',
     marginBottom: 10,
     padding: 5
+  },
+  linkUserButton: {
+    textAlign: 'center',
+    color: '#AAAAAA',
+    marginBottom: 10,
+    padding: 5,
+    fontSize: 28
+  },
+  linkBlueButton: {
+    textAlign: 'center',
+    color: 'blue',
+    marginBottom: 10,
+    padding: 5,
+    fontSize: 28
+  },
+  linkGreenButton: {
+    textAlign: 'center',
+    color: 'green',
+    marginBottom: 10,
+    padding: 5,
+    fontSize: 28
+  },
+  linkRedButton: {
+    textAlign: 'center',
+    color: 'red',
+    marginBottom: 10,
+    padding: 5,
+    fontSize: 28
+  },
+  linkBlackButton: {
+    textAlign: 'center',
+    color: 'black',
+    marginBottom: 10,
+    padding: 5,
+    fontSize:80,
+    backgroundColor: '#DDDDDD',
+    borderRadius: 1
   }
 });
 

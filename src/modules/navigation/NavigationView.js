@@ -36,7 +36,8 @@ const NavigationView = React.createClass({
     return (
       <NavigationHeader
         {...sceneProps}
-        onNavigateBack={this.props.onNavigateBack}
+        onNavigateBack={this.props.onNavigateBack
+        }
         renderTitleComponent={() => {
           return (
             <NavigationHeader.Title>

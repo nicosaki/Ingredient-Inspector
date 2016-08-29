@@ -66,7 +66,7 @@ const CounterView = React.createClass({
             height: 80
           }}
         />
-        <Text style={styles.linkButton}>
+      <Text style={styles.linkUserButton}>
           Welcome, {this.props.userName}!
         </Text>
       </View>
@@ -84,32 +84,32 @@ const CounterView = React.createClass({
 
         <TouchableOpacity
           onPress={this.concernss}>
-          <Text style={[styles.linkButton]}>
+          <Text style={[styles.linkBlackButton]}>
             View and edit your Concerns list
           </Text>
         </TouchableOpacity>
 
         <TouchableOpacity
           onPress={this.approveds}>
-          <Text style={[styles.linkButton]}>
+          <Text style={[styles.linkGreenButton]}>
             See your Approved list
           </Text>
         </TouchableOpacity>
 
         <TouchableOpacity onPress={this.avoids}>
-          <Text style={styles.linkButton}>
+          <Text style={styles.linkRedButton}>
             See your Avoid list
           </Text>
         </TouchableOpacity>
 
         <TouchableOpacity onPress={this.contacteds}>
-          <Text style={styles.linkButton}>
-            See manufacturers you have contacted
+          <Text style={styles.linkBlueButton}>
+            See manufacturers contacted
           </Text>
         </TouchableOpacity>
 
         <TouchableOpacity onPress={this.abouts} accessible={true}>
-          <Text style={styles.linkButton}>
+          <Text style={styles.linkUserButton}>
             {'About IngredientInspector'}
           </Text>
         </TouchableOpacity>
@@ -121,9 +121,9 @@ const CounterView = React.createClass({
 
 const circle = {
   borderWidth: 0,
-  borderRadius: 40,
-  width: 80,
-  height: 80
+  borderRadius: 100,
+  width: 160,
+  height: 160
 };
 
 const styles = StyleSheet.create({
@@ -131,39 +131,75 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'white'
+    backgroundColor: 'white',
+
   },
   userContainer: {
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
+    backgroundColor: 'grey',
+    marginTop: 1,
+    flex: 1,
+    flexDirection: 'row'
   },
   userProfilePhoto: {
     ...circle,
     alignSelf: 'center'
   },
-  counterButton: {
-    ...circle,
-    backgroundColor: 'green',
-    alignItems: 'center',
-    justifyContent: 'center',
-    margin: 20
-  },
   counter: {
     color: 'white',
     fontSize: 20,
-    textAlign: 'center'
+    textAlign: 'center',
   },
   welcome: {
     textAlign: 'center',
     color: 'black',
-    marginBottom: 5,
-    padding: 5
+    marginBottom: 125,
+    marginTop: 100,
+    padding: 125,
+  },
+  linkUserButton: {
+    textAlign: 'center',
+    color: '#AAAAAA',
+    marginBottom: 10,
+    padding: 25,
+    fontSize: 40,
+    marginTop: 1
   },
   linkButton: {
     textAlign: 'center',
-    color: '#CCCCCC',
+    color: '#888888',
     marginBottom: 10,
-    padding: 5
+    padding: 25,
+    fontSize: 40
+  },
+  linkGreenButton: {
+    textAlign: 'center',
+    color: 'green',
+    marginBottom: 10,
+    padding: 25,
+    fontSize: 40
+  },
+  linkRedButton: {
+    textAlign: 'center',
+    color: 'red',
+    marginBottom: 10,
+    padding: 25,
+    fontSize: 40
+  },
+  linkBlackButton: {
+    textAlign: 'center',
+    color: 'black',
+    marginBottom: 10,
+    padding: 25,
+    fontSize: 40
+  },
+  linkBlueButton: {
+    textAlign: 'center',
+    color: 'blue',
+    marginBottom: 10,
+    padding: 25,
+    fontSize: 40
   }
 });
 

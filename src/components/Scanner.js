@@ -7,7 +7,8 @@ import {
   View
 } from 'react-native';
 import BarcodeScanner from 'react-native-barcodescanner';
-import NavigationState from '../modules/navigation/NavigationState'
+import * as NavigationState from '../modules/navigation/NavigationState';
+
 
 class Scanner extends Component {
   constructor(props) {
