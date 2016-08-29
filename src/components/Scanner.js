@@ -23,27 +23,32 @@ class Scanner extends Component {
     };
   }
 
-
+  // popBack() {
+  //   this.props.dispatch(NavigationState.popRoute());
+  // }
 
   barcodeReceived(e) {
-    if (e.data !== this.state.barcode || e.type !== this.state.type) Vibration.vibrate();
+    // if (e.data !== this.state.barcode || e.type !== this.state.type) Vibration.vibrate();
 
     this.setState({
-      barcode: e.data,
+      barcode: '737628064502',
       text: `${e.data} (${e.type})`,
       type: e.type,
       scanned: true
     });
-
-    this.props.dispatch(NavigationState.popRoute();
+    this.props.dispatch(IngredientState.queryBarcode(e.data))
+    this.props.dispatch(NavigationState.popRoute())
+    this.props.dispatch(NavigationState.pushRoute({
+      key: 'Ingredients',
+      title: 'Check Ingredients'
+    }));
   }
-
 
   render() {
     return (
       <View style={styles.container}>
         <BarcodeScanner
-          onBarCodeRead={this.barcodeReceived.bind(this)}
+          onDrag={this.barcodeReceived.bind(this)}
           style={{ flex: 1 }}
           torchMode={this.state.torchMode}
           cameraType={this.state.cameraType}

@@ -21,7 +21,7 @@ const GET_USER_ID = 'CounterState/GET_USER_ID';
 
 
 export function updateConcerns(new_concerns, user_id = 1) {
-  fetch('http://10.0.3.2:3000/user/' + user_id, {
+  fetch('http://10.0.2.2:3000/user/' + user_id, {
     method: 'POST',
     headers: {
       'Accept': 'application/json',
@@ -36,7 +36,7 @@ export function updateConcerns(new_concerns, user_id = 1) {
 
 export function updateContacted(upc, user_id = '1') {
   if (upc) {
-    fetch('http://10.0.3.2:3000/user/' + user_id + '/' + upc, {
+    fetch('http://10.0.2.2:3000/user/' + user_id + '/' + upc, {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
@@ -51,7 +51,7 @@ export function updateContacted(upc, user_id = '1') {
 
 export function updateAvoid(upc, user_id = '1') {
   if (upc) {
-    fetch('http://10.0.3.2:3000/user/' + user_id + '/avoid/' + upc, {
+    fetch('http://10.0.2.2:3000/user/' + user_id + '/avoid/' + upc, {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
@@ -66,7 +66,7 @@ export function updateAvoid(upc, user_id = '1') {
 
 export function updateApproved(upc, user_id = '1') {
   if (upc) {
-  fetch('http://10.0.3.2:3000/user/' + user_id + '/appoved/' + upc, {
+  fetch('http://10.0.2.2:3000/user/' + user_id + '/appoved/' + upc, {
     method: 'POST',
     headers: {
       'Accept': 'application/json',
@@ -104,13 +104,13 @@ export default function CounterStateReducer(state = initialState, action = {}) {
       return state.update('concerns', concerns => concerns + action.payload);
 
     case UPDATE_CONTACTED:
-      return state.update('contacted', contacted => contacted.concat(action.payload));
+      return state.update('contacted', contacted => contacted.concat(action.payload)).uniq();
 
     case UPDATE_AVOID:
-      return state.update('avoid', avoid => avoid.concat(action.payload));
+      return state.update('avoid', avoid => avoid.concat(action.payload)).uniq();
 
     case UPDATE_APPROVED:
-      return state.update('approved', approved => approved.concat(action.payload));
+      return state.update('approved', approved => approved.concat(action.payload)).uniq();
 
     case GET_USER_ID:
       return state.id;
