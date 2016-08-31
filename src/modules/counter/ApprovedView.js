@@ -13,14 +13,21 @@ import {
 
 const ApprovedView = React.createClass({
   propTypes: {
+    approved: PropTypes.array
+  },
 
+  approved_product_array() {
+    return (this.props.approved).map(function(obj, index) {return obj.product})
+  },
+
+  approved_brand_array() {
+    return (this.props.approved).map(function(obj, index) {return obj.brand})
   },
 
   render() {
     const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
-    var approveds = this.props.approved
-    console.log("APPROVED: ", approveds)
-
+    var approved_products = this.approved_product_array()
+    var approved_brands = this.approved_brand_array()
     const loadingStyle = this.props.loading
       ? {backgroundColor: '#eee'}
       : null;
@@ -28,24 +35,25 @@ const ApprovedView = React.createClass({
     return (
       <View style={styles.container}>
         <SwipeListView
-            dataSource={ds.cloneWithRows(approveds)}
-            renderRow={ approveds => (
+            dataSource={ds.cloneWithRows(approved_products)}
+            enableEmptySections={true}
+            renderRow={ approved_products => (
                 <View style={styles.rowFront}>
-                    <Text>{approveds}</Text>
+                    <Text>{approved_products}</Text>
                 </View>
             )}
+            renderHiddenRow={ approved_brands=> (
+                <View style={styles.rowBack}>
+                    <Text>{approved_brands}</Text>
+                </View>
+            )}
+            leftOpenValue={75}
+            rightOpenValue={-75}
         />
       </View>
-    );
+    )
   }
-});
-
-const circle = {
-  borderWidth: 0,
-  borderRadius: 40,
-  width: 80,
-  height: 80
-};
+})
 
 const styles = StyleSheet.create({
   container: {
@@ -57,28 +65,6 @@ const styles = StyleSheet.create({
   userContainer: {
     justifyContent: 'center',
     alignItems: 'center'
-  },
-  userProfilePhoto: {
-    ...circle,
-    alignSelf: 'center'
-  },
-  counterButton: {
-    ...circle,
-    backgroundColor: 'green',
-    alignItems: 'center',
-    justifyContent: 'center',
-    margin: 20
-  },
-  counter: {
-    color: 'white',
-    fontSize: 20,
-    textAlign: 'center'
-  },
-  welcome: {
-    textAlign: 'center',
-    color: 'black',
-    marginBottom: 5,
-    padding: 5
   },
   linkButton: {
     textAlign: 'center',

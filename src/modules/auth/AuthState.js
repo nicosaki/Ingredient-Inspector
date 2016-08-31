@@ -29,14 +29,16 @@ export function onUserLoginSuccess(profile, token) {
       console.log("API RESPONSE: ", response);
       let data = JSON.parse(response._bodyText)
       console.log("DATA: ", data)
-      data = data.id
-      console.log("ID: ", data)
       return {
         type: USER_LOGIN_SUCCESS,
         payload: {
           profile: fromJS(profile),
           token: fromJS(token),
-          user_id: data
+          user_id: data.id,
+          avoid: data.avoid,
+          approved: data.approved,
+          concerns: data.concerns,
+          contacted: data.contacted
         }
       };
     } else {
@@ -68,7 +70,7 @@ export default function AuthStateReducer(state = initialState, action = {}) {
         .set('isLoggedIn', true)
         .set('currentUser', action.payload.profile)
         .set('authenticationToken', action.payload.token)
-        .set('user_id', action.payload.id);
+        .set('user_id', action.payload.id)
     case USER_LOGIN_ERROR:
       return initialState;
     default:

@@ -31,6 +31,7 @@ class Scanner extends Component {
   // }
 
   barcodeReceived(e) {
+    let id = this.props.user_id
     if (e.data !== this.state.barcode || e.type !== this.state.type) Vibration.vibrate();
 
     // this.setState({
@@ -40,7 +41,7 @@ class Scanner extends Component {
     //   loading: true
     // });
     this.props.dispatch(ScannerState.saveBarcode(e.data))
-    IngredientState.queryBarcode(e.data, this.props.dispatch)
+    IngredientState.queryBarcode(e.data, id, this.props.dispatch)
     this.props.dispatch(NavigationState.popRoute())
     this.props.dispatch(NavigationState.pushRoute({
       key: 'Ingredients',

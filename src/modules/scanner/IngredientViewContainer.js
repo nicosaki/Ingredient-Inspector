@@ -5,7 +5,7 @@ import IngredientView from './IngredientView';
 // Because we omit the second parameter, the `dispatch` function is
 // automatically passed as a prop.
 export default connect(
-  function(state) {console.log("INGREDIENT_STATE-j: ", state.getIn(['ingredients', 'loading']));
+  function(state) {
   return {
     barcode: state.getIn(['scanner', 'barcode']),
     ingredients: state.getIn(['ingredients', 'ingredients']),

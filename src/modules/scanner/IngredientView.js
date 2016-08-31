@@ -19,39 +19,69 @@ const IngredientView = React.createClass({
     },
 
   contact_manufacturer() {
-    this.props.dispatch(CounterState.updateContacted(this.props.barcode, this.props.user_id));
+    let upc = this.props.barcode
+    let id = this.props.user_id
+    let _product = this.props.product
+    let _brand = this.props.brand
+    let contacted = this.props.contacted
+    if (contacted !== []) {
+      let new_contacted = contacted.concat([{product: _product, brand: _brand}]).unique()
+    } else {
+      new_contacted = [{product: _product, brand: _brand}]
+    }
+    this.props.dispatch(CounterState.updateContacted(upc, id, new_contacted));
   },
 
   update_avoid() {
-    this.props.dispatch(CounterState.updateAvoid(this.props.barcode, this.props.user_id, this.props.product));
+    let upc = this.props.barcode
+    let id = this.props.user_id
+    let _product = this.props.product
+    let _brand = this.props.brand
+    let avoid = this.props.avoid
+    if (avoid !== []) {
+      let new_avoid = avoid.concat([{product: _product, brand: _brand}]).unique()
+    } else {
+      new_avoid = [{product: _product, brand: _brand}]
+    }
+    this.props.dispatch(CounterState.updateAvoid(upc, id, new_avoid));
   },
 
   update_approved() {
-    this.props.dispatch(CounterState.updateApproved(this.props.barcode, this.props.user_id, this.props.product));
+    let upc = this.props.barcode
+    let id = this.props.user_id
+    let _product = this.props.product
+    let _brand = this.props.brand
+    let approved = this.props.approved
+    if (approved !== []) {
+      let new_approved = approved.concat([{product: _product, brand: _brand}]).unique()
+    } else {
+      new_approved = [{product: _product, brand: _brand}]
+    }
+    this.props.dispatch(CounterState.updateApproved(upc, id, new_approved));
   },
 
   open_scanner() {
     this.props.dispatch(NavigationState.pushRoute({
       key: 'Scanner',
       title: 'SCAN A BARCODE',
-      params: {
-        getFeedBack: function(text) {
-          _this.setState({feedback: text});
-        }
-      }
+      // params: {
+      //   getFeedBack: function(text) {
+      //     _this.setState({feedback: text});
+      //   }
+      // }
     }));
   },
 
   ingredients_name_array() {
-    return this.props.ingredients.map(function(obj, index) {return obj.name})
+    return (this.props.ingredients).map(function(obj, index) {return obj.name})
   },
 
   ingredients_status_array() {
-    return this.props.ingredients.map(function(obj, index) {if (obj.status) {return obj.status} else {return ''} })
+    return (this.props.ingredients).map(function(obj, index) {return obj.status})
   },
 
   ingredients_warnings_array() {
-    return this.props.ingredients.map(function(obj, index) {if (obj.warnings) {return obj.warnings} else {return ''} })
+    return (this.props.ingredients).map(function(obj, index) {return obj.warnings})
   },
 
   render() {
@@ -71,9 +101,15 @@ const IngredientView = React.createClass({
       return (<View style={styles.container}><Text>Loading ingredients...</Text></View>)
     }
     if (ingredients === "No flagged ingredients") {
-      return (<View style={styles.container}><Text>No ingredients of concern! </Text></View>)
+      return (<View style={styles.container}><Text>No ingredients of concern! </Text>
+        <TouchableOpacity onPress={this.open_scanner}>
+          <Text style={styles.linkBlackButton}>
+            Scan product
+          </Text>
+        </TouchableOpacity>
+      </View>)
     }
-    if (ingredients && ingredients.message !== "No ingredients added" && ingredients.status !== 0) {
+    if (ingredients && ingredients!== ["No ingredients added"]) {
       var ingredients_names = this.ingredients_name_array()
       var ingredients_statuses = this.ingredients_status_array()
       var ingredients_warnings = this.ingredients_warnings_array()
@@ -86,6 +122,7 @@ const IngredientView = React.createClass({
           </TouchableOpacity>
           <SwipeListView
               dataSource={ds.cloneWithRows(ingredients_names)}
+              enableEmptySections={true}
               renderRow={ ingredients_names => (
                   <View style={styles.rowFront}>
                       <Text>{ingredients_names}</Text>
@@ -126,7 +163,7 @@ const IngredientView = React.createClass({
             Scan product
           </Text>
         </TouchableOpacity>
-        <Text>IngredientInspector relies on Open Food Facts, a crowd-sourced database of products around the world. Unfortunately, this product or its ingredients are not in the database. You can contribute to their project to improve open-source data and improve IngredientInspector at openfoodfacts.org/data</Text>
+        <Text style={styles.userContainer}>IngredientInspector relies on Open Food Facts, a crowd-sourced database of products around the world. Unfortunately, this product or its ingredients are not in the database. You can contribute to their project to improve open-source data and improve IngredientInspector at openfoodfacts.org/data</Text>
         </View>)}
 
     const loadingStyle = this.props.loading
@@ -200,6 +237,12 @@ const styles = StyleSheet.create({
     fontSize:35,
     backgroundColor: '#DDDDDD',
     borderRadius: 1
+  },
+  floatLeft: {
+    justifyContent: 'flex-start'
+  },
+  floatRight: {
+    justifyContent: 'flex-end'
   }
 });
 

@@ -12,28 +12,29 @@ import {
 
 const ConcernsView = React.createClass({
   propTypes: {
-    concerns: PropTypes.string
+    concerns: PropTypes.string,
+    new_concerns: PropTypes.string
   },
 
-  updateConcerns(concerns) {
-    this.props.dispatch(CounterState.updateConcerns(concerns));
+  updateConcerns(concerns, id) {
+    this.props.dispatch(CounterState.updateConcerns(concerns, id));
   },
 
   renderConcernsList() {
-    if (!this.props.userName) {
-      return null;
-  },
-
+    const ID = this.props.user_id
+    var _concerns = this.props.concerns
+    console.log("_CONCERNS: ", _concerns)
     return (
-      <View>
+      <View style={styles.container}>
         <Text style={styles.text}>IngredientInspector is a tool to help you discover potentially harmful ingredients in products. It is not a substitute for reading the label. If you have food allergies, ALWAYS read the label.</Text>
-        <Text style={styles.text}>Below, add ingredients of personal concern that you want IngredientInspector to check for. Please type each ingredient separated by a comma, and for maximized safety include bothe singular and pluralized forms of your concern. (eg. 'strawberries, strawberry') Be aware that IngedientInspector directly compares your input below to product ingredients, so errors here will result in errors in results</Text>
+        <Text style={styles.text}>Below, add ingredients of personal concern that you want IngredientInspector to check for. Please type each ingredient separated by a comma, and for maximized effectiveness include both singular and pluralized forms of your concern. (eg. 'strawberries, strawberry') Be aware that IngedientInspector directly compares your input below to product ingredients, so errors here will result in errors in results</Text>
         <View style={styles.inputContainer}>
         <TextInput
             autoFocus={true}
             style={styles.textInput}
-            onChangeText={(concerns) => this.setState({concerns})}
-            value={this.state.concerns} />
+            onChangeText={(concerns) => this.updateConcerns({concerns}, ID)}
+            value={_concerns}
+             />
       </View>
     </View>
     );
@@ -67,7 +68,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'red'
   },
   textInput: {
-    color: '#ffffff',
+    color: '#444444',
     flex: 1,
     width: 60,
     height: 60,

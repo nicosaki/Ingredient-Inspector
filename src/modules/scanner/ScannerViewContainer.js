@@ -7,7 +7,8 @@ import Scanner from '../../components/Scanner';
 export default connect(
   state => ({
     barcode: state.getIn(['ingredients', 'barcode']),
-    ingredients: state.getIn(['ingredients', 'ingredients'])
+    ingredients: state.getIn(['ingredients', 'ingredients']),
+    user_id: state.getIn(['auth', 'user_id'])
   })
 
 )(Scanner);

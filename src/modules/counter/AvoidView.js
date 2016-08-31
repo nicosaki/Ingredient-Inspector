@@ -13,12 +13,21 @@ import {
 
 const AvoidView = React.createClass({
   propTypes: {
+    avoid: PropTypes.array
+  },
+
+  avoid_product_array() {
+    return (this.props.avoid).map(function(obj, index) {return obj.product})
+  },
+
+  avoid_brand_array() {
+    return (this.props.avoid).map(function(obj, index) {return obj.brand})
   },
 
   render() {
     const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
-    var avoids = this.props.avoid
-    console.log("AVOID: ", avoids)
+    var avoid_products = this.avoid_product_array()
+    var avoid_brands = this.avoid_brand_array()
     const loadingStyle = this.props.loading
       ? {backgroundColor: '#eee'}
       : null;
@@ -26,32 +35,26 @@ const AvoidView = React.createClass({
     return (
       <View style={styles.container}>
         <SwipeListView
-            dataSource={ds.cloneWithRows(avoids)}
-            renderRow={ avoids => (
+            dataSource={ds.cloneWithRows(avoid_products)}
+            enableEmptySections={true}
+            renderRow={ avoid_products => (
                 <View style={styles.rowFront}>
-                    <Text>{avoids}</Text>
+                    <Text>{avoid_products}</Text>
                 </View>
             )}
-            renderHiddenRow={ ingredients_statuses=> (
+            renderHiddenRow={ avoid_brands=> (
                 <View style={styles.rowBack}>
-                    <Text>{ingredients_statuses}</Text>
-                    <Text>{ingredients_warnings}</Text>
+                    <Text>{avoid_brands}</Text>
+                    <Text>{avoid_brands}</Text>
                 </View>
             )}
             leftOpenValue={75}
             rightOpenValue={-75}
         />
       </View>
-    );
+    )
   }
 });
-
-const circle = {
-  borderWidth: 0,
-  borderRadius: 40,
-  width: 80,
-  height: 80
-};
 
 const styles = StyleSheet.create({
   container: {
@@ -63,28 +66,6 @@ const styles = StyleSheet.create({
   userContainer: {
     justifyContent: 'center',
     alignItems: 'center'
-  },
-  userProfilePhoto: {
-    ...circle,
-    alignSelf: 'center'
-  },
-  counterButton: {
-    ...circle,
-    backgroundColor: 'green',
-    alignItems: 'center',
-    justifyContent: 'center',
-    margin: 20
-  },
-  counter: {
-    color: 'white',
-    fontSize: 20,
-    textAlign: 'center'
-  },
-  welcome: {
-    textAlign: 'center',
-    color: 'black',
-    marginBottom: 5,
-    padding: 5
   },
   linkButton: {
     textAlign: 'center',

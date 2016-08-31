@@ -47,6 +47,10 @@ const CounterView = React.createClass({
       title: 'High-Concern Ingredients'
     }));
   },
+  retrieve_user() {
+    var id = this.props.id
+    this.props.dispatch(CounterState.retrieveUser(id));
+  },
 
 
   renderUserInfo() {
@@ -74,7 +78,7 @@ const CounterView = React.createClass({
     const loadingStyle = this.props.loading
       ? {backgroundColor: '#eee'}
       : null;
-
+    {this.retrieveUser}
     return (
       <View style={styles.container}>
 

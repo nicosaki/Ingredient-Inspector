@@ -9,6 +9,8 @@ export default connect(
     userProfilePhoto: state.getIn(['auth', 'currentUser', 'picture']),
     approved: state.getIn(['counter', 'approved']),
     contacted: state.getIn(['counter', 'contacted']),
-    user_id: state.getIn(['auth', 'user_id'])
+    user_id: state.getIn(['auth', 'user_id']),
+    concerns: state.getIn(['counter', 'concerns']),
+    new_concerns: state.getIn(['counter', 'new_concerns'])
   })
 )(CounterView);

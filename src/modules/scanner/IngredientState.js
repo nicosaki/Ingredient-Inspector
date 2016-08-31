@@ -19,6 +19,7 @@ const initialState = Map({
 // ACTION TYPES (Naming: SCREAMING_CASE)
 // const QUERY_BARCODE = 'ScannerState/QUERY_BARCODE';
 const QUERY_BARCODE = 'IngredientState/QUERY_BARCODE';
+const RETURN_INGREDIENTS = 'IngredientState/RETURN_INGREDIENTS';
 // const GET_INGREDIENTS = 'IngredientState/GET_INGREDIENTS';
 // const GET_UPC = 'IngredientState/GET_UPC';
 // const UPDATE_AVOID = 'ScannerState/UPDATE_AVOID';
@@ -26,8 +27,8 @@ const QUERY_BARCODE = 'IngredientState/QUERY_BARCODE';
 // const UPDATE_CONTACTED = 'ScannerState/UPDATE_CONTACTED';
 
 // ACTION CREATORS (Naming: camelCase)
-export function queryBarcode(upc, callback) {
-  return fetch('https://ingredientinspector-serve.herokuapp.com/ingredients/' + upc.toString(), {
+export function queryBarcode(upc, id, callback) {
+  return fetch('https://ingredientinspector-serve.herokuapp.com/ingredients/' + upc.toString() + '/' + id, {
     method: 'GET',
     headers: {
       'Accept': 'application/json',
@@ -35,12 +36,11 @@ export function queryBarcode(upc, callback) {
     }
   }).then( response => {
     let data = JSON.parse(response._bodyText)
-    console.log("DATA: ", data)
-    // console.log("INGREDIENTS: ", data.ingredients)
-    if (data.ingredients) {
-      callback({type: QUERY_BARCODE, payload: data.ingredients})
+    console.log("INGREDIENTS_DATA: ", data)
+    if (data.ingredients && data.message !== "No ingredients added") {
+      callback({type: QUERY_BARCODE, payload: data})
     } else {
-      callback({type: QUERY_BARCODE, payload: []})
+      callback({type: RETURN_INGREDIENTS, payload: {ingredients: ['No ingredients added']}})
     }
   })
 }
@@ -50,11 +50,13 @@ export default function IngredientStateReducer(state = initialState, action = {}
   switch (action.type) {
     case QUERY_BARCODE:
       return state
-        .set('ingredients', action.payload)
+        .set('ingredients', action.payload.ingredients)
         .set('product', action.payload.product)
         .set('brand', action.payload.brand)
         .set('loading', false);
-
+    case RETURN_INGREDIENTS:
+      return state
+        .set('ingredients', action.payload.ingredients);
     default:
       return state;
   }
