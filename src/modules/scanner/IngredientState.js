@@ -27,7 +27,7 @@ const RETURN_INGREDIENTS = 'IngredientState/RETURN_INGREDIENTS';
 // const UPDATE_CONTACTED = 'ScannerState/UPDATE_CONTACTED';
 
 // ACTION CREATORS (Naming: camelCase)
-export function queryBarcode(upc, id, callback) {
+export function queryBarcode(upc, id = 1, callback) {
   return fetch('https://ingredientinspector-serve.herokuapp.com/ingredients/' + upc.toString() + '/' + id, {
     method: 'GET',
     headers: {

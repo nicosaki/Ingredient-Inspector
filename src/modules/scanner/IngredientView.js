@@ -19,43 +19,43 @@ const IngredientView = React.createClass({
     },
 
   contact_manufacturer() {
-    let upc = this.props.barcode
-    let id = this.props.user_id
-    let _product = this.props.product
-    let _brand = this.props.brand
-    let contacted = this.props.contacted
+    var upc = this.props.barcode
+    var id = this.props.user_id
+    var _product = this.props.product
+    var _brand = this.props.brand
+    var contacted = this.props.contacted
     if (contacted !== []) {
-      let new_contacted = contacted.concat([{product: _product, brand: _brand}]).unique()
+      var new_contacted = contacted.push({product: _product, brand: _brand})
     } else {
-      new_contacted = [{product: _product, brand: _brand}]
+      var new_contacted = [{product: _product, brand: _brand}]
     }
     this.props.dispatch(CounterState.updateContacted(upc, id, new_contacted));
   },
 
   update_avoid() {
-    let upc = this.props.barcode
-    let id = this.props.user_id
-    let _product = this.props.product
-    let _brand = this.props.brand
-    let avoid = this.props.avoid
+    var upc = this.props.barcode
+    var id = this.props.user_id
+    var _product = this.props.product
+    var _brand = this.props.brand
+    var avoid = this.props.avoid
     if (avoid !== []) {
-      let new_avoid = avoid.concat([{product: _product, brand: _brand}]).unique()
+      var new_avoid = avoid.push({product: _product, brand: _brand})
     } else {
-      new_avoid = [{product: _product, brand: _brand}]
+      var new_avoid = [{product: _product, brand: _brand}]
     }
     this.props.dispatch(CounterState.updateAvoid(upc, id, new_avoid));
   },
 
   update_approved() {
-    let upc = this.props.barcode
-    let id = this.props.user_id
-    let _product = this.props.product
-    let _brand = this.props.brand
-    let approved = this.props.approved
+    var upc = this.props.barcode
+    var id = this.props.user_id
+    var _product = this.props.product
+    var _brand = this.props.brand
+    var approved = this.props.approved
     if (approved !== []) {
-      let new_approved = approved.concat([{product: _product, brand: _brand}]).unique()
+      var new_approved = approved.push({product: _product, brand: _brand})
     } else {
-      new_approved = [{product: _product, brand: _brand}]
+      var new_approved = [{product: _product, brand: _brand}]
     }
     this.props.dispatch(CounterState.updateApproved(upc, id, new_approved));
   },
