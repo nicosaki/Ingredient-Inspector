@@ -5,6 +5,7 @@ import AuthStateReducer from '../modules/auth/AuthState';
 import CounterStateReducer from '../modules/counter/CounterState';
 import SessionStateReducer, {RESET_STATE} from '../modules/session/SessionState';
 import IngredientStateReducer from '../modules/scanner/IngredientState';
+import ScannerStateReducer from '../modules/scanner/ScannerState';
 
 
 const reducers = {
@@ -20,7 +21,7 @@ const reducers = {
 
   session: SessionStateReducer,
   //
-  // scanner: ScannerStateReducer
+  scanner: ScannerStateReducer,
 
   ingredients: IngredientStateReducer
 

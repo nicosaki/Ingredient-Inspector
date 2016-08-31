@@ -1,40 +1,40 @@
 import * as CounterState from './CounterState';
 import * as NavigationState from '../../modules/navigation/NavigationState';
 import React, {PropTypes} from 'react';
+import { SwipeListView } from 'react-native-swipe-list-view';
 import {
   StyleSheet,
   TouchableOpacity,
   Image,
   Text,
-  View
+  View,
+  ListView
 } from 'react-native';
 
 const ApprovedView = React.createClass({
   propTypes: {
-    approved: PropTypes.array
+
   },
 
-  renderApprovedList() {
-    // var ApprovedList = (this.state.avoid) //guessing so hard
-    if (!this.props.userName) {
-      return null;
-    }
-
-    return (
-      <View style={styles.userContainer}>
-        <Text style={styles.linkButton}>
-        </Text>
-      </View>
-    );
-  },
   render() {
+    const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+    var approveds = this.props.approved
+    console.log("APPROVED: ", approveds)
+
     const loadingStyle = this.props.loading
       ? {backgroundColor: '#eee'}
       : null;
 
     return (
       <View style={styles.container}>
-        {this.renderApprovedList()}
+        <SwipeListView
+            dataSource={ds.cloneWithRows(approveds)}
+            renderRow={ approveds => (
+                <View style={styles.rowFront}>
+                    <Text>{approveds}</Text>
+                </View>
+            )}
+        />
       </View>
     );
   }

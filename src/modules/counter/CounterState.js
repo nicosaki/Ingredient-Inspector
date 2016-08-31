@@ -31,7 +31,7 @@ export function updateConcerns(new_concerns, user_id = 1) {
       concerns: new_concerns,
     })
   })
-  return {type: UPDATE_CONCERNS, payload: checked};
+  return {type: UPDATE_CONCERNS, payload: new_concerns};
 }
 
 export function updateContacted(upc, user_id = '1') {
@@ -43,13 +43,13 @@ export function updateContacted(upc, user_id = '1') {
         'Content-Type': 'application/json',
       }
     })
-    return {type: UPDATE_CONTACTED, payload: upc};
+    return {type: UPDATE_CONTACTED, payload: [upc]};
   } else {
-    return {type: UPDATE_CONTACTED, payload: []};
+    return {type: GET_USER_ID, payload: []};
   }
 }
 
-export function updateAvoid(upc, user_id = '1') {
+export function updateAvoid(upc, user_id = '1', product) {
   if (upc) {
     fetch('https://ingredientinspector-serve.herokuapp.com/user/' + user_id + '/avoid/' + upc, {
       method: 'POST',
@@ -58,13 +58,13 @@ export function updateAvoid(upc, user_id = '1') {
         'Content-Type': 'application/json',
       }
     })
-    return {type: UPDATE_AVOID, payload: upc};
+    return {type: UPDATE_AVOID, payload: [product]};
   } else {
-    return {type: UPDATE_AVOID, payload: []};
+    return {type: GET_USER_ID, payload: []};
   }
 }
 
-export function updateApproved(upc, user_id = '1') {
+export function updateApproved(upc, user_id = '1', product) {
   if (upc) {
   fetch('https://ingredientinspector-serve.herokuapp.com/user/' + user_id + '/appoved/' + upc, {
     method: 'POST',
@@ -73,15 +73,15 @@ export function updateApproved(upc, user_id = '1') {
       'Content-Type': 'application/json',
     }
   })
-  return {type: UPDATE_APPROVED, payload: upc};
+  return {type: UPDATE_APPROVED, payload: [product]};
 } else {
-  return {type: UPDATE_APPROVED, payload: []};
+  return {type: GET_USER_ID, payload: []};
 }
 }
 
-export function getUserId() {
-  return {type: GET_USER_ID};
-}
+// export function getUserId() {
+//   return {type: GET_USER_ID};
+// }
 
 // export async function requestRandomNumber() {
 //   return {
@@ -104,16 +104,13 @@ export default function CounterStateReducer(state = initialState, action = {}) {
       return state.update('concerns', concerns => concerns + action.payload);
 
     case UPDATE_CONTACTED:
-      return state.update('contacted', contacted => contacted.concat(action.payload));
+      return state.update('contacted', contacted => (contacted.concat(action.payload)));
 
     case UPDATE_AVOID:
       return state.update('avoid', avoid => avoid.concat(action.payload));
 
     case UPDATE_APPROVED:
       return state.update('approved', approved => approved.concat(action.payload));
-
-    case GET_USER_ID:
-      return state.id;
 
     default:
       return state;

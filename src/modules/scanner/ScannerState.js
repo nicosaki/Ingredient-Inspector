@@ -1,4 +1,3 @@
-// NOT  CURRENTLY CONNECTED IN REDUCER; MAY BE TRASH
 import {Map} from 'immutable';
 import {loop, Effects} from 'redux-loop';
 
@@ -11,11 +10,10 @@ import {loop, Effects} from 'redux-loop';
 
 const initialState = Map({
   barcode: '',
-  loading: true,
-  avoid: [],
-  approved: [],
-  contacted: [],
-  concerns: ''
+  cameraType: 'back',
+  text: 'Scan Barcode',
+  torchMode: 'off',
+  type: ''
 });
 
 // ACTION TYPES (Naming: SCREAMING_CASE)
@@ -25,7 +23,7 @@ const initialState = Map({
 // the action name descriptive, as it helps with debugging. In most cases the action constants
 // will be private to the State file, but in some advanced scenarios may be exported
 
-// const RETURN_UPC = 'ScannerState/RETURN_UPC';
+const SAVE_BARCODE = 'ScannerState/SAVE_BARCODE';
 
 // ACTION CREATORS (Naming: camelCase)
 //
@@ -38,9 +36,9 @@ const initialState = Map({
 //
 // Action creators are always named exports, `export function name() {...}`, or `export const name = ...`
 
-// export function increment() {
-//   return {type: UPDATE_NUMBER, payload: +1};
-// }
+export function saveBarcode(upc) {
+  return {type: SAVE_BARCODE, payload: upc};
+}
 
 // REDUCER (Naming: PascalCase)
 //
@@ -53,11 +51,11 @@ const initialState = Map({
 //
 // The reducer is always an ES6 default export.
 //
-// export default function ScannerStateReducer(state = initialState, action) {
-//   switch (action.type) {
-//     case UPDATE_NUMBER:
-//       return state.update('value', value => value + action.payload);
-//     default:
-//       return state;
-//   }
-// }
+export default function ScannerStateReducer(state = initialState, action) {
+  switch (action.type) {
+    case SAVE_BARCODE:
+      return state.update('barcode', barcode => action.payload);
+    default:
+      return state;
+  }
+}

@@ -8,6 +8,9 @@ import {
 } from 'react-native';
 import BarcodeScanner from 'react-native-barcodescanner';
 import * as NavigationState from '../modules/navigation/NavigationState';
+import * as IngredientState from '../modules/scanner/IngredientState';
+import * as ScannerState from '../modules/scanner/ScannerState';
+
 
 
 class Scanner extends Component {
@@ -30,13 +33,14 @@ class Scanner extends Component {
   barcodeReceived(e) {
     if (e.data !== this.state.barcode || e.type !== this.state.type) Vibration.vibrate();
 
-    this.setState({
-      barcode: e.data,
-      text: `${e.data} (${e.type})`,
-      type: e.type,
-      scanned: true
-    });
-    this.props.dispatch(IngredientState.queryBarcode(e.data))
+    // this.setState({
+    //   barcode: e.data,
+    //   text: `${e.data} (${e.type})`,
+    //   type: e.type,
+    //   loading: true
+    // });
+    this.props.dispatch(ScannerState.saveBarcode(e.data))
+    IngredientState.queryBarcode(e.data, this.props.dispatch)
     this.props.dispatch(NavigationState.popRoute())
     this.props.dispatch(NavigationState.pushRoute({
       key: 'Ingredients',

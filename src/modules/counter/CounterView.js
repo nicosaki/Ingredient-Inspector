@@ -16,9 +16,7 @@ const CounterView = React.createClass({
     loading: PropTypes.bool.isRequired,
     dispatch: PropTypes.func.isRequired
   },
-  check_if_update() {
-    this.props.dispatch(CounterState.checkIfUpdate());
-  },
+
   abouts() {
     this.props.dispatch(NavigationState.pushRoute({
       key: 'About',
@@ -62,8 +60,8 @@ const CounterView = React.createClass({
           style={styles.userProfilePhoto}
           source={{
             uri: this.props.userProfilePhoto,
-            width: 80,
-            height: 80
+            width: 30,
+            height: 30
           }}
         />
       <Text style={styles.linkUserButton}>
@@ -122,8 +120,8 @@ const CounterView = React.createClass({
 const circle = {
   borderWidth: 0,
   borderRadius: 100,
-  width: 160,
-  height: 160
+  width: 50,
+  height: 50
 };
 
 const styles = StyleSheet.create({
@@ -161,45 +159,39 @@ const styles = StyleSheet.create({
   linkUserButton: {
     textAlign: 'center',
     color: '#AAAAAA',
-    marginBottom: 10,
-    padding: 25,
-    fontSize: 40,
-    marginTop: 1
+    fontSize: 22
   },
   linkButton: {
     textAlign: 'center',
     color: '#888888',
-    marginBottom: 10,
-    padding: 25,
-    fontSize: 40
+    fontSize: 22
   },
   linkGreenButton: {
     textAlign: 'center',
     color: 'green',
     marginBottom: 10,
-    padding: 25,
-    fontSize: 40
+    padding: 10,
+    fontSize: 22
   },
   linkRedButton: {
     textAlign: 'center',
     color: 'red',
     marginBottom: 10,
-    padding: 25,
-    fontSize: 40
+    padding: 10,
+    fontSize: 22
   },
   linkBlackButton: {
     textAlign: 'center',
     color: 'black',
-    marginBottom: 10,
-    padding: 25,
-    fontSize: 40
+    padding: 10,
+    fontSize: 22
   },
   linkBlueButton: {
     textAlign: 'center',
     color: 'blue',
     marginBottom: 10,
-    padding: 25,
-    fontSize: 40
+    padding: 10,
+    fontSize: 22
   }
 });
 
